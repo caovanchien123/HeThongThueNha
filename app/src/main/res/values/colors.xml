@@ -3,8 +3,19 @@
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
+    <color name="cyan_a400">#00e5ff</color>
+    <color name="deep_purple_200">#b39ddb</color>
+    <color name="red_50000">#d50000</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
+    <color name="red_400">#EF5350</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="red_200">#EF9A9A</color>
+    <color name="pink_300">#f186c0</color>
+    <color name="startGColor">#9E7CDC</color>
+    <color name="centerGColor">#A55058</color>
+    <color name="endGColor">#ECB592</color>
+    <color name="green_200">#c6f68d</color>
+    <color name="yellow_100">#F4FF81</color>
 </resources>

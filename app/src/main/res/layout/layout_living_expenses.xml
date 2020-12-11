@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:id="@+id/layout_living1"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10sp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/custom_water_img"
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:src="@drawable/drop"/>
+        <TextView
+            android:id="@+id/custom_water_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3k"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_living2"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10sp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/custom_electricity_img"
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:src="@drawable/bolt"/>
+        <TextView
+            android:id="@+id/custom_electricity_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10k"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_living3"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10sp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/custom_utilities_img"
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:src="@drawable/globe"/>
+        <TextView
+            android:id="@+id/custom_internet_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="180k"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_living4"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10sp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/custom_tv_img"
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:src="@drawable/tv"/>
+        <TextView
+            android:id="@+id/custom_tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="210k"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_living5"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10sp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/custom_parking_img"
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:src="@drawable/parking"/>
+        <TextView
+            android:id="@+id/custom_parking_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="60k"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+
+</LinearLayout>
