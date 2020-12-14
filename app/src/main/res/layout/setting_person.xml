@@ -70,6 +70,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
                         android:layout_weight="1"
+                        android:textColor="@color/black"
                         android:text="PhamThanhHuy@gmail.com"/>
                     <TextView
                         android:id="@+id/person_tv_money"
@@ -77,6 +78,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
                         android:gravity="center"
+                        android:textColor="@color/black"
                         android:layout_weight="1"
                         android:text="100.000 đ"/>
                 </LinearLayout>

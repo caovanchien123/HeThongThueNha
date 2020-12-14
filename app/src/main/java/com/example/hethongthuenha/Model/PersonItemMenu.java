@@ -1,12 +1,10 @@
-package com.example.hethongthuenha.Person.Model;
+package com.example.hethongthuenha.Model;
 
-import android.widget.ImageView;
-
-public class PersonItemRecycleView {
+public class PersonItemMenu {
     int imageItem;
     String name;
 
-    public PersonItemRecycleView(int imageItem, String name) {
+    public PersonItemMenu(int imageItem, String name) {
         this.imageItem = imageItem;
         this.name = name;
     }

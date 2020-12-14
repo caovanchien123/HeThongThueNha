@@ -1,33 +1,43 @@
 package com.example.hethongthuenha;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.hethongthuenha.Person.Adapter.CustomAdapterPersonItem;
-import com.example.hethongthuenha.Person.Model.PersonItemRecycleView;
+import com.example.hethongthuenha.PersonSetting.Adapter.CustomAdapterPersonMenu;
+import com.example.hethongthuenha.Model.PersonItemMenu;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    RecyclerView recyclerView;
-    ArrayList<PersonItemRecycleView> personItemRecycleViews;
-    CustomAdapterPersonItem personItem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.setting_person);
-        recyclerView = findViewById(R.id.person_recyclerView);
-        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
-        personItemRecycleViews = new ArrayList<PersonItemRecycleView>();
-        personItemRecycleViews.add(new PersonItemRecycleView(R.drawable.person_image_infomation, "Cá nhân"));
-        personItemRecycleViews.add(new PersonItemRecycleView(R.drawable.person_image_payment, "Hoa hồng"));
-        personItemRecycleViews.add(new PersonItemRecycleView(R.drawable.person_image_save_money, "Nạp tiền"));
-        personItemRecycleViews.add(new PersonItemRecycleView(R.drawable.person_image_money_out, "Rút tiền"));
-        personItemRecycleViews.add(new PersonItemRecycleView(R.drawable.person_image_logout, "Đăng xuất"));
-        personItem = new CustomAdapterPersonItem(getApplicationContext(), personItemRecycleViews);
-        recyclerView.setAdapter(personItem);
+        setContentView(null);
     }
 }
