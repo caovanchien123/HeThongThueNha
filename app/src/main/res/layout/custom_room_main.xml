@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:id="@+id/cvRoomMain"
+    android:elevation="8sp"
+    app:cardCornerRadius="8sp"
+    app:cardElevation="10sp"
+    app:cardUseCompatPadding="true"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:padding="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="180sp"
+            android:src="@drawable/home"
+            android:scaleType="fitXY"
+            android:id="@+id/custom_img_main"/>
+        <TextView
+            android:layout_marginTop="10sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tiêu đề"
+            android:textColor="@color/black"
+            android:id="@+id/tv_title_main"/>
+        <TextView
+            android:layout_marginTop="10sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Địa chỉ"
+            android:textColor="@color/black"
+            android:id="@+id/tv_address_main"/>
+        <TextView
+            android:layout_marginTop="10sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Giá"
+            android:textColor="@color/black"
+            android:id="@+id/tv_price_main"/>
+
+        <TextView
+            android:layout_marginTop="10sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Loại:Nguyên căn"
+            android:textSize="24sp"
+            android:textColor="@color/black"
+            android:id="@+id/tv_type_room_main"/>
+
+        <TextView
+            android:id="@+id/tv_time_added_room"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="HAHAHA"
+            android:gravity="right"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
