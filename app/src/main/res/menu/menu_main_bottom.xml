@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/mnRoom"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Phòng trọ"/>
+    <item android:id="@+id/mnNeed"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_baseline_add_to_photos_24"
+        android:title="Nhu cầu"/>
+    <item android:id="@+id/mnNotification"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_baseline_notifications_24"
+        android:title="Thông báo"/>
+    <item android:id="@+id/mnChat"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_baseline_chat_24"
+        android:title="Chat"/>
+    <item android:id="@+id/mnAdmin"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_baseline_admin_panel_settings_24"
+        android:title="Admin" />
+</menu>

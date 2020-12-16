@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    tools:context=".CreateRoom.Fragment.fragment_description">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/filledTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="@android:color/darker_gray"
+        android:hint="Tiêu đề">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_marginTop="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etTitle"
+            android:backgroundTint="@color/white"
+            android:inputType="text"
+            android:maxLines="1"
+            android:maxLength="500"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/filledDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="@android:color/darker_gray"
+        android:hint="Mô tả">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_marginTop="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etDescription"
+            android:backgroundTint="@color/white"
+            android:maxLines="5"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/filledAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="@android:color/darker_gray"
+        android:hint="Địa chỉ">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_marginTop="20sp"
+            android:id="@+id/etAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:inputType="text"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_marginTop="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/filledPrice"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColorHint="@android:color/darker_gray"
+            android:hint="Giá tiền">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:inputType="numberDecimal"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Spinner
+            android:id="@+id/spDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:entries="@array/spDate"/>
+    </LinearLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/filledArea"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="@android:color/darker_gray"
+        android:hint="Diện tích">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:id="@+id/etArea"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:inputType="numberDecimal"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/filledAccommodation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="@android:color/darker_gray"
+        android:hint="Sức chứa">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etAccommodation"
+            android:layout_marginTop="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:inputType="number"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/filledAmout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@android:color/darker_gray"
+            android:hint="Còn trống">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etAmout"
+                android:layout_marginTop="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:inputType="number"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    <RadioGroup
+        android:id="@+id/radGroupRoom"
+        android:layout_marginTop="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radPhongTro"
+            android:layout_weight="1"
+            android:checked="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Phòng trọ"/>
+        <RadioButton
+            android:id="@+id/radNhaNguyenCan"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nhà nguyên căn"/>
+        <RadioButton
+            android:id="@+id/radOGhep"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ở ghép"/>
+    </RadioGroup>
+
+        <Button
+            android:id="@+id/btnFinishStage1"
+            android:layout_width="match_parent"
+            android:backgroundTint="@android:color/holo_red_dark"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"
+            android:text="Hoàn tất"/>
+    </LinearLayout>
+</ScrollView>

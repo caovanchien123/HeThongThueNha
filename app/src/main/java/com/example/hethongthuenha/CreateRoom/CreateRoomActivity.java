@@ -25,7 +25,7 @@ import com.example.hethongthuenha.CreateRoom.Fragment.fragment_description;
 import com.example.hethongthuenha.CreateRoom.Fragment.fragment_image;
 import com.example.hethongthuenha.CreateRoom.Fragment.fragment_living_expenses;
 import com.example.hethongthuenha.CreateRoom.Fragment.fragment_utilities;
-import com.example.hethongthuenha.MainActivity.MainActivity;
+import com.example.hethongthuenha.MainActivity;
 import com.example.hethongthuenha.Model.Description_Room;
 import com.example.hethongthuenha.Model.District;
 import com.example.hethongthuenha.Model.Image_Room;

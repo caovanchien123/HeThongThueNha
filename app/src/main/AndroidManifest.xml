@@ -21,6 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".CreateRoom.CreateRoomActivity"/>
+        <activity android:name=".ActivitySearchRoom"/>
+        <activity android:name=".ActivityRoomDetail"/>
+        <activity android:name=".Model.ActivityPerson"/>
     </application>
 
 </manifest>

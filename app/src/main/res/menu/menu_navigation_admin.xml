@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/mnCommission"
+        android:title="Hoa hồng" />
+
+    <item
+        android:id="@+id/mnPay"
+        android:title="Thanh Toán" />
+
+    <item
+        android:id="@+id/mnAccount"
+        android:title="Tài khoản" />
+
+    <item
+        android:id="@+id/mnAds"
+        android:title="Quảng cáo" />
+
+    <item
+        android:id="@+id/mnRepay"
+        android:title="Nạp tiền" />
+    <item
+        android:id="@+id/mnReport"
+        android:title="Báo cáo" />
+    <item
+        android:id="@+id/mnRefund"
+        android:title="Hoàn tiền" />
+
+
+    <item android:title="Thống kê">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/mnHistory"
+                    android:title="Xem lịch sử giao dịch" />
+            </group>
+        </menu>
+
+    </item>
+
+    <item android:title="Hành động">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/mnExit"
+                    android:title="Thoát" />
+            </group>
+        </menu>
+
+    </item>
+
+</menu>

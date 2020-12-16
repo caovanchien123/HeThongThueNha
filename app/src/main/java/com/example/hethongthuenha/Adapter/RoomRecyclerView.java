@@ -251,7 +251,7 @@ public class RoomRecyclerView extends RecyclerView.Adapter<RoomRecyclerView.MyVi
 
 
                 } else {
-                    ActivitySettingPerson.AddPoint("Bạn không đủ tiền", context);
+                    //ActivitySettingPerson.AddPoint("Bạn không đủ tiền", context);
                 }
             } catch (Exception ex) {
                 Toast.makeText(context, "Lỗi !", Toast.LENGTH_SHORT).show();
