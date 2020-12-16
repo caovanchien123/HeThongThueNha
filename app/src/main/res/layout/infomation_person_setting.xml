@@ -66,6 +66,7 @@
         android:textSize="28sp"
         android:textStyle="bold"/>
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/person_information_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </LinearLayout>

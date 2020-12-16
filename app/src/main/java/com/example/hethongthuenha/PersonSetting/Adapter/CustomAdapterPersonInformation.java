@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.hethongthuenha.ModelA.Room;
 import com.example.hethongthuenha.R;
 
 import java.util.ArrayList;
@@ -17,9 +18,9 @@ import java.util.ArrayList;
 public class CustomAdapterPersonInformation extends RecyclerView.Adapter<CustomAdapterPersonInformation.ViewHolder> {
 
     Context context;
-    ArrayList<String> rooms;
+    ArrayList<Room> rooms;
 
-    public CustomAdapterPersonInformation(Context context, ArrayList<String> rooms) {
+    public CustomAdapterPersonInformation(Context context, ArrayList<Room> rooms) {
         this.context = context;
         this.rooms = rooms;
     }
@@ -33,7 +34,12 @@ public class CustomAdapterPersonInformation extends RecyclerView.Adapter<CustomA
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+        Room room = rooms.get(position);
+        holder.tvNumber.setText(room.getStage1().getPrice()+"");
+        holder.tvDiaChi.setText(room.getStage1().getAddress());
+        holder.tvName.setText(room.getStage1().getTitle());
+        holder.tvPrice.setText(room.getStage1().getPrice()+"");
+        holder.imgItem.setImageResource(R.drawable.person_image_infomation);
     }
 
     @Override
