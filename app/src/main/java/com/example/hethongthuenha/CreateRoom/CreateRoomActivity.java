@@ -1,46 +1,31 @@
 package com.example.hethongthuenha.CreateRoom;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hethongthuenha.API.PersonAPI;
 import com.example.hethongthuenha.CreateRoom.Fragment.IDataCommunication;
 import com.example.hethongthuenha.CreateRoom.Fragment.fragment_description;
-import com.example.hethongthuenha.CreateRoom.Fragment.fragment_image;
-import com.example.hethongthuenha.CreateRoom.Fragment.fragment_living_expenses;
-import com.example.hethongthuenha.CreateRoom.Fragment.fragment_utilities;
-import com.example.hethongthuenha.MainActivity;
+import com.example.hethongthuenha.MainActivity.MainActivity;
 import com.example.hethongthuenha.Model.Description_Room;
-import com.example.hethongthuenha.Model.District;
 import com.example.hethongthuenha.Model.Image_Room;
 import com.example.hethongthuenha.Model.LivingExpenses_Room;
 import com.example.hethongthuenha.Model.Room;
 import com.example.hethongthuenha.Model.Utilities_Room;
 import com.example.hethongthuenha.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 public class CreateRoomActivity extends AppCompatActivity implements IDataCommunication {

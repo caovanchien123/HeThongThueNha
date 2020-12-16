@@ -14,17 +14,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HệThốngThuêNhà">
-        <activity android:name=".MainActivity">
+        <activity android:name=".CreateRoom.CreateRoomActivity" />
+        <activity android:name=".MainActivity.MainActivity"/>
+        <activity android:name=".ActivitySearchRoom">
+
+        </activity>
+        <activity android:name=".ActivityRoomDetail" />
+        <activity android:name=".Login.LoginActivity">
+
+        </activity>
+        <activity android:name=".Register.RegisterActivity" />
+        <activity android:name=".SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CreateRoom.CreateRoomActivity"/>
-        <activity android:name=".ActivitySearchRoom"/>
-        <activity android:name=".ActivityRoomDetail"/>
-        <activity android:name=".Model.ActivityPerson"/>
     </application>
 
 </manifest>

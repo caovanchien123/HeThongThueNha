@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/relativeLogin"
+    android:background="@drawable/gradient_bg"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:background="@drawable/custom_form"
+        android:id="@+id/login_layout_main"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+
+        android:orientation="vertical"
+        android:layout_width="360dp"
+        android:layout_height="400dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="85dp"
+            android:fontFamily="@font/chewy"
+            android:text="LOGIN"
+            android:textColor="#4A4A4A"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/loginEmail"
+            android:drawablePadding="15dp"
+            android:drawableLeft="@drawable/image_user"
+            android:hint="Account"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/custom_input"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"/>
+        <EditText
+            android:id="@+id/loginPassword"
+            android:drawablePadding="15dp"
+            android:drawableLeft="@drawable/image_password"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/custom_input"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"/>
+
+        <Button
+            android:id="@+id/btnRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10sp"
+            android:background="@android:color/transparent"
+            android:text="Bạn chưa có tài khoản?"
+            android:textColor="#2196F3" />
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_gravity="center"
+            android:text="Login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <ImageView
+        android:background="@drawable/cricle_image"
+        android:padding="23dp"
+        android:src="@drawable/home"
+        android:layout_alignBottom="@id/login_layout_main"
+        android:layout_marginBottom="310dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="150dp"
+        android:layout_height="150dp"/>
+
+</RelativeLayout>
