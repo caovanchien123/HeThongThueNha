@@ -2,9 +2,9 @@ package com.example.hethongthuenha.Register;
 
 import android.util.Log;
 
-import com.example.hethongthuenha.Model.Person;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+
 
 public class RegisterPresenter implements RegisterContract.Presenter {
 
