@@ -12,22 +12,22 @@
         android:textSize="25sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Thanh toan tien"/>
+        android:text="Thanh toán tiền"/>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
             android:textStyle="bold"
-            android:layout_weight="0.6"
-            android:layout_width="match_parent"
+            android:textSize="18dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ho Ten"/>
+            android:text="Họ tên: "/>
         <TextView
             android:id="@+id/tv_Name"
-            android:layout_weight="0.3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="right"
             android:text="Cao Van Chien"/>
     </LinearLayout>
     <LinearLayout
@@ -36,15 +36,15 @@
         android:layout_height="wrap_content">
         <TextView
             android:textStyle="bold"
-            android:layout_weight="0.6"
-            android:layout_width="match_parent"
+            android:textSize="18dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ID"/>
+            android:text="ID: "/>
         <TextView
             android:id="@+id/tv_ID"
-            android:layout_weight="0.3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="right"
             android:text="1234567890987654567222"/>
     </LinearLayout>
     <LinearLayout
@@ -53,15 +53,15 @@
         android:layout_height="wrap_content">
         <TextView
             android:textStyle="bold"
-            android:layout_weight="0.6"
-            android:layout_width="match_parent"
+            android:textSize="18dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Email"/>
+            android:text="Email: "/>
         <TextView
             android:id="@+id/tv_Email"
-            android:layout_weight="0.3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="right"
             android:text="Cao Van Chien"/>
     </LinearLayout>
     <LinearLayout
@@ -70,16 +70,16 @@
         android:layout_height="wrap_content">
         <TextView
             android:textStyle="bold"
-            android:layout_weight="0.6"
-            android:layout_width="match_parent"
+            android:textSize="18dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chi tiet"/>
+            android:text="Chi tiết: "/>
         <TextView
             android:id="@+id/tv_Detail"
-            android:layout_weight="0.3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="tien hoa hong"/>
+            android:gravity="right"
+            android:text="Thanh toán hoa hồng"/>
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -87,13 +87,13 @@
         android:layout_height="wrap_content">
         <TextView
             android:textStyle="bold"
-            android:layout_weight="0.6"
-            android:layout_width="match_parent"
+            android:textSize="18dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tong"/>
+            android:text="Tổng: "/>
         <TextView
             android:id="@+id/tv_Price"
-            android:layout_weight="0.3"
+            android:gravity="right"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="200.000 VND"/>
@@ -108,11 +108,11 @@
             android:id="@+id/btn_Huy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Huy"/>
+            android:text="Hủy"/>
         <Button
             android:id="@+id/btn_ThanhToan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Thanh Toan"/>
+            android:text="Đồng ý"/>
     </LinearLayout>
 </LinearLayout>

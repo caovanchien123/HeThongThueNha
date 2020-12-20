@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#E1E1E1"
+    android:background="@color/tim1"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -33,8 +33,8 @@
                     android:id="@+id/person_tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:textColor="@color/black"
+                    android:textSize="22sp"
+                    android:textColor="@color/white"
                     android:layout_weight="1"
                     android:textStyle="bold"
                     android:text="Pham Thanh Huy"/>
@@ -44,7 +44,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:layout_weight="1"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:text="PhamThanhHuy@gmail.com"/>
                 <TextView
                     android:id="@+id/person_tv_money"
@@ -53,20 +53,27 @@
                     android:textSize="14sp"
                     android:gravity="center"
                     android:layout_weight="1"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:text="100.000 đ"/>
             </LinearLayout>
     </LinearLayout>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Danh sach cac phong"
-        android:textColor="@color/black"
+        android:text="Danh sách các phòng"
+        android:textColor="@color/white"
         android:gravity="center"
         android:textSize="28sp"
         android:textStyle="bold"/>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/person_information_home"
+    <androidx.cardview.widget.CardView
+        app:cardCornerRadius="25dp"
+        android:layout_margin="10dp"
+        app:cardBackgroundColor="@color/tim3"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/person_information_home"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </androidx.cardview.widget.CardView>
 </LinearLayout>

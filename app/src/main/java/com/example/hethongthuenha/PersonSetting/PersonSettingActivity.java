@@ -1,11 +1,11 @@
 package com.example.hethongthuenha.PersonSetting;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -13,8 +13,11 @@ import android.widget.Toast;
 
 import com.example.hethongthuenha.API.PersonAPI;
 import com.example.hethongthuenha.Model.PersonItemMenu;
+import com.example.hethongthuenha.ModelA.Model.Person;
 import com.example.hethongthuenha.PersonSetting.Adapter.CustomAdapterPersonMenu;
-import com.example.hethongthuenha.PersonSetting.Dialog.DialogPayment;
+import com.example.hethongthuenha.PersonSetting.Dialog.PersonDialogPayment;
+import com.example.hethongthuenha.PersonSetting.Dialog.PersonDialogPurchase;
+import com.example.hethongthuenha.PersonSetting.Dialog.PersonDialogRefund;
 import com.example.hethongthuenha.R;
 
 import java.util.ArrayList;
@@ -64,6 +67,8 @@ public class PersonSettingActivity extends AppCompatActivity {
     private void setListItem() {
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
         personItemRecycleViews = new ArrayList<PersonItemMenu>();
+        personItemRecycleViews.add(new PersonItemMenu(R.drawable.person_image_infomation, "rổng"));
+        personItemRecycleViews.add(new PersonItemMenu(R.drawable.person_image_infomation, "rổng"));
         personItemRecycleViews.add(new PersonItemMenu(R.drawable.person_image_infomation, "Cá nhân"));
         personItemRecycleViews.add(new PersonItemMenu(R.drawable.person_image_payment, "Thanh Toan"));
         personItemRecycleViews.add(new PersonItemMenu(R.drawable.person_image_save_money, "Nạp tiền"));
@@ -75,22 +80,21 @@ public class PersonSettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view, int position, boolean isLongClick) {
                 switch (position){
-                    case 0:
+                    case 2:
                         Intent intent = new Intent(getApplicationContext(), PersonInformationActivity.class);
                         intent.putExtra("id_person", "ss");
                         startActivity(intent);
                         break;
-                    case 1:
-                        DialogPayment payment = new DialogPayment(PersonSettingActivity.this);
-                        Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
-                        break;
-                    case 2:
-                        Toast.makeText(getApplicationContext(), "2", Toast.LENGTH_SHORT).show();
-                        break;
                     case 3:
-                        Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_SHORT).show();
+                        PersonDialogPayment payment = new PersonDialogPayment(PersonSettingActivity.this);
                         break;
                     case 4:
+                        PersonDialogPurchase dialogPurchase = new PersonDialogPurchase(PersonSettingActivity.this);
+                        break;
+                    case 5:
+                        PersonDialogRefund dialogRefund = new PersonDialogRefund(PersonSettingActivity.this);
+                        break;
+                    case 6:
                         Toast.makeText(getApplicationContext(), "4", Toast.LENGTH_SHORT).show();
                         break;
                 }

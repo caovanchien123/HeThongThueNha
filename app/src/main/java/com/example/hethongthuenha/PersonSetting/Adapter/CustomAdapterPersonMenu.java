@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,10 +15,12 @@ import com.example.hethongthuenha.R;
 
 import java.util.ArrayList;
 
-public class CustomAdapterPersonMenu extends RecyclerView.Adapter<CustomAdapterPersonMenu.ViewHolder> {
+public class CustomAdapterPersonMenu extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
     ArrayList<PersonItemMenu> personItemMenus;
     ItemClickListener itemClickListener;
+    private static final int RONG = 0;
+    private static final int ITEM = 1;
 
     public void setItemClickListener(ItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;
@@ -32,28 +33,48 @@ public class CustomAdapterPersonMenu extends RecyclerView.Adapter<CustomAdapterP
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.custom_item_person_setting, parent, false);
-        return new ViewHolder(view);
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        if(viewType == ITEM ){
+            View view = LayoutInflater.from(context).inflate(R.layout.custom_item_person_setting, parent, false);
+            return new ViewHolder(view);
+        }else if(viewType == RONG){
+            View view = LayoutInflater.from(context).inflate(R.layout.person_bank_item, parent, false);
+            return new ViewHolderRong(view);
+        }
+        else
+            throw new RuntimeException("Could not inflate layout");
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        PersonItemMenu itemRecycleView = personItemMenus.get(position);
-        holder.name.setText(itemRecycleView.getName());
-        holder.imageItem.setImageResource(itemRecycleView.getImageItem());
-        holder.setItemClickListener(new ItemClickListener() {
-            @Override
-            public void onClick(View view, int position, boolean isLongClick) {
-                itemClickListener.onClick(view, position, isLongClick);
-            }
-        });
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        if(holder instanceof ViewHolder){
+            PersonItemMenu itemRecycleView = personItemMenus.get(position);
+            ((ViewHolder) holder).name.setText(itemRecycleView.getName());
+            ((ViewHolder) holder).imageItem.setImageResource(itemRecycleView.getImageItem());
+            ((ViewHolder) holder).setItemClickListener(new ItemClickListener() {
+                @Override
+                public void onClick(View view, int position, boolean isLongClick) {
+                    itemClickListener.onClick(view, position, isLongClick);
+                }
+            });
+        }else if(holder instanceof ViewHolderRong){
+
+        }
+
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        if (position == 1 || position == 0)
+            return RONG;
+        else
+            return ITEM;
+    }
     @Override
     public int getItemCount() {
         return personItemMenus.size();
     }
+
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         ImageView imageItem;
@@ -81,6 +102,13 @@ public class CustomAdapterPersonMenu extends RecyclerView.Adapter<CustomAdapterP
         public boolean onLongClick(View v) {
             itemClickListener.onClick(v, getAdapterPosition(), true);
             return true;
+        }
+    }
+
+    class ViewHolderRong extends RecyclerView.ViewHolder{
+        public ViewHolderRong(@NonNull View itemView) {
+            super(itemView);
+
         }
     }
 

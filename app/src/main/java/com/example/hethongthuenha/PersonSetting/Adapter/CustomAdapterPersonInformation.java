@@ -1,23 +1,20 @@
 package com.example.hethongthuenha.PersonSetting.Adapter;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.hethongthuenha.ModelA.Room;
 import com.example.hethongthuenha.PersonSetting.Dialog.PersonDialogMenuItem;
-import com.example.hethongthuenha.PersonSetting.PersonInformationActivity;
 import com.example.hethongthuenha.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -45,17 +42,15 @@ public class CustomAdapterPersonInformation extends RecyclerView.Adapter<CustomA
         holder.tvName.setText(room.getStage1().getTitle());
         holder.tvPrice.setText(room.getStage1().getPrice()+"");
         holder.tvKieu.setText(room.getStage1().getType_room());
-        holder.imgCustom.setImageResource(R.drawable.person_image_infomation);
-        holder.imgItem.setOnClickListener(new View.OnClickListener() {
+        Picasso.with(context).load(room.getStage3().getImagesURL().get(0)).into(holder.imgCustom);
+        holder.setItemClickListener(new ItemClickListener() {
             @Override
-            public void onClick(View v) {
-                PersonDialogMenuItem dialogMenuItem = new PersonDialogMenuItem(context, room);
-            }
-        });
-        holder.layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
+            public void onClick(View view, int position, boolean isLongClick) {
+                if(isLongClick){
+                    PersonDialogMenuItem menuItem = new PersonDialogMenuItem(context, room);
+                }else {
+                    Toast.makeText(context, "Chi tiet", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
@@ -65,10 +60,14 @@ public class CustomAdapterPersonInformation extends RecyclerView.Adapter<CustomA
         return rooms.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         TextView tvName, tvPrice, tvNgay, tvDiaChi, tvKieu;
-        ImageView imgItem, imgCustom;
-        CardView layout;
+        ImageView imgCustom;
+        ItemClickListener itemClickListener;
+
+        public void setItemClickListener(ItemClickListener itemClickListener) {
+            this.itemClickListener = itemClickListener;
+        }
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -77,9 +76,24 @@ public class CustomAdapterPersonInformation extends RecyclerView.Adapter<CustomA
             tvPrice = itemView.findViewById(R.id.tv_price_main);
             tvNgay = itemView.findViewById(R.id.tv_time_added_room);
             tvDiaChi = itemView.findViewById(R.id.tv_address_main);
-            imgItem = itemView.findViewById(R.id.custom_more_main);
             imgCustom = itemView.findViewById(R.id.custom_img_main);
-            layout = itemView.findViewById(R.id.cvRoomMain);
+            itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            itemClickListener.onClick(v, getAdapterPosition(), false);
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            itemClickListener.onClick(v, getAdapterPosition(), true);
+            return true;
+        }
+    }
+
+    public interface ItemClickListener{
+        void onClick(View view, int position, boolean isLongClick);
     }
 }

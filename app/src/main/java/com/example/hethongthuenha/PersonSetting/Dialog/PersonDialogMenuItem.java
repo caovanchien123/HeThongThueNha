@@ -8,14 +8,28 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.hethongthuenha.ModelA.Room;
+import com.example.hethongthuenha.PersonSetting.Adapter.CustomAdapterPersonInformation;
 import com.example.hethongthuenha.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import androidx.annotation.NonNull;
 
 public class PersonDialogMenuItem extends Dialog {
     LinearLayout lnXoa, lnSua, lnQC, lnDSNguoiDung;
+    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     Context context;
     Room room;
+    RoomDataChanger roomDataChanger;
+
+    public void setRoomDataChanger(RoomDataChanger roomDataChanger) {
+        this.roomDataChanger = roomDataChanger;
+    }
+
     public PersonDialogMenuItem(@NonNull Context context, Room room) {
         super(context);
         setContentView(R.layout.person_information_dialog_item_menu);
@@ -44,7 +58,26 @@ public class PersonDialogMenuItem extends Dialog {
         lnXoa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Xoa", Toast.LENGTH_LONG).show();
+                firestore.collection("Room").whereEqualTo("room_id", room.getRoom_id()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        for (QueryDocumentSnapshot snapshot : queryDocumentSnapshots){
+                            firestore.collection("Room").document(snapshot.getId()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    roomDataChanger.removeRoom();
+                                    Toast.makeText(context, "Xoa thành công", Toast.LENGTH_LONG).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(context, "Lôi khi xóa", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        }
+                    }
+                });
+                cancel();
             }
         });
         lnSua.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +94,7 @@ public class PersonDialogMenuItem extends Dialog {
         });
     }
 
-
-
-
+    public interface RoomDataChanger{
+        void removeRoom();
+    }
 }

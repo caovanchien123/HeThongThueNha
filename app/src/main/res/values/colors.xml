@@ -7,4 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="tim1">#716DF2</color>
+    <color name="tim2">#888DF2</color>
+    <color name="tim3">#94A2F2</color>
+    <color name="tim4">#A0B4F2</color>
+    <color name="tim5">#BBD8F2</color>
 </resources>
