@@ -1,3 +1,39 @@
 <resources>
-    <string name="app_name">Hệ Thống Thuê Nhà</string>
+    <string name="app_name">HeThongThueNha</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="list_room"><u>Danh sách các phòng</u></string>
+    <string name="test_description">In descriptive writing, the author does not just tell the reader what was seen, felt, tested, smelled, or heard. Rather, the author describes something from their own experience and, through careful choice of words</string>
+    <string-array name="spDate">
+        <item>Ngày</item>
+        <item>Tháng</item>
+        <item>Năm</item>
+    </string-array>
+
+    <string-array name="spTypeRoom">
+        <item>Nhà nguyên căn</item>
+        <item>Nhà trọ</item>
+        <item>Nhà ở ghép</item>
+    </string-array>
+
+
+    <string-array name="spAccount">
+        <item>Mở khóa</item>
+        <item>Khóa</item>
+    </string-array>
+
+    <string-array name="spReport">
+        <item>Không giống như hình</item>
+        <item>Không giống với giá đã đưa</item>
+        <item>Thái độ chủ trọ tiêu cực</item>
+    </string-array>
+
+    <string-array name="spAds">
+        <item>60000VNĐ/7 Ngày</item>
+        <item>160000VNĐ/17 Ngày</item>
+        <item>360000VNĐ/27 Ngày</item>
+    </string-array>
+
+    <string name="navigation_open_drawer">Navigation Open</string>
+    <string name="navigation_close_drawer">Navigation Close</string>
 </resources>
