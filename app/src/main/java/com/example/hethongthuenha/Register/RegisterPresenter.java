@@ -30,7 +30,7 @@ public class RegisterPresenter implements RegisterContract.Presenter {
                     if(task.isSuccessful()){
                         String id=task.getResult().getUser().getUid();
                         mFirebase.collection("User")
-                                .add(new Person(id,username, email, contact,""))
+                                .add(new Person (id,username, email, contact,""))
                                 .addOnSuccessListener(documentReference -> Log.d(TAG, "onSuccess: "))
                                 .addOnFailureListener(e -> Log.d(TAG, "onFailure: "));
                         view.registerSuccess();
