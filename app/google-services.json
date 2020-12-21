@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "461588293186",
+    "project_id": "hethongthuenha-9590f",
+    "storage_bucket": "hethongthuenha-9590f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:461588293186:android:4b6fa13274dc0a23552fdb",
+        "android_client_info": {
+          "package_name": "com.example.hethongthuenha"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "461588293186-gi7os7pv932o48a34eqn96lpidbjtmsh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZaiANS2ixLZ5WvSztC_jd9WLlpIxTKIM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "461588293186-gi7os7pv932o48a34eqn96lpidbjtmsh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
