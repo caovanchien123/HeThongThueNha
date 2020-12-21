@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/gradient_bg"
     tools:context=".MainActivity.MainActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -22,7 +23,7 @@
             android:layout_gravity="center"
             android:fontFamily="monospace"
             android:text="Hệ thống Thuê Nhà"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="20dp" />
     </androidx.appcompat.widget.Toolbar>
 

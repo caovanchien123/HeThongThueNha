@@ -2,9 +2,9 @@ package com.example.hethongthuenha.Register;
 
 import android.util.Log;
 
+import com.example.hethongthuenha.Model.Person;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
-
 
 public class RegisterPresenter implements RegisterContract.Presenter {
 
@@ -30,7 +30,7 @@ public class RegisterPresenter implements RegisterContract.Presenter {
                     if(task.isSuccessful()){
                         String id=task.getResult().getUser().getUid();
                         mFirebase.collection("User")
-                                .add(new Person (id,username, email, contact,""))
+                                .add(new Person(id,username, email, contact,"",1,false))
                                 .addOnSuccessListener(documentReference -> Log.d(TAG, "onSuccess: "))
                                 .addOnFailureListener(e -> Log.d(TAG, "onFailure: "));
                         view.registerSuccess();
