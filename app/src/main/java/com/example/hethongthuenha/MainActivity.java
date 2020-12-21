@@ -68,7 +68,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    private void Init() {
+        ShowDialogReport();
+    }
 
     public void addContact(String strRoomName, String strRoomPrice) {
         PhongTro obj = new PhongTro();
@@ -80,7 +82,28 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void ShowDialogReport() {
+        btnBaoCao.setOnClickListener(v ->
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            View viewLayout = getLayoutInflater().inflate(R.layout.layout_report, null);
+            builder.setView(viewLayout);
+            spReport = viewLayout.findViewById(R.id.sp_report);
+            et_description_report = viewLayout.findViewById(R.id.et_description_report);
+            btnCancelReport = viewLayout.findViewById(R.id.btn_cancel_report);
+            btnSendReport = viewLayout.findViewById(R.id.btn_send_report);
+            btnBaoCao = findViewById(R.id.btnBaoCao);
+            final AlertDialog show = builder.show();
+            btnCancelReport.setOnClickListener(c -> show.dismiss());
+            btnSendReport.setOnClickListener(c -> {
+                String typeReport = spReport.getSelectedItem().toString();
+                String description = et_description_report.getText().toString();
+                Timestamp reportAdded = new Timestamp(new Date());
+            });
 
+        });
+
+    }
 
 
 }
