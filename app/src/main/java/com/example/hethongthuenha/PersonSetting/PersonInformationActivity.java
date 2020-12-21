@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,10 +12,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hethongthuenha.ModelA.Room;
 import com.example.hethongthuenha.PersonSetting.Adapter.CustomAdapterPersonInformation;
+import com.example.hethongthuenha.PersonSetting.Dialog.DialogProgress;
+import com.example.hethongthuenha.PersonSetting.Dialog.PersonDialogMenuItem;
+import com.example.hethongthuenha.PersonSetting.Dialog.PersonDialogRefund;
 import com.example.hethongthuenha.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -40,20 +46,18 @@ public class PersonInformationActivity extends AppCompatActivity {
     }
 
     private void getData() {
+        DialogProgress progress = new DialogProgress(PersonInformationActivity.this, "Đang tải dữ liệu");
+        progress.show();
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         roomArrayList = new ArrayList<Room>();
-        firestore.collection("Room").whereEqualTo("person_id", "KV1AuttZUFXmaJCjJ8pHHYP2VwD2").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        firestore.collection("Room").whereEqualTo("person_id", "KV1AuttZUFXmaJCjJ8pHHYP2VwD2").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                for (QueryDocumentSnapshot snapshot : queryDocumentSnapshots){
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                for (QueryDocumentSnapshot snapshot : value){
                     roomArrayList.add(snapshot.toObject(Room.class));
                 }
                 customAdapterPersonInformation.notifyDataSetChanged();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getApplicationContext(), "LoidDatabase", Toast.LENGTH_SHORT).show();
+                progress.cancel();
             }
         });
         customAdapterPersonInformation = new CustomAdapterPersonInformation(PersonInformationActivity.this, roomArrayList);

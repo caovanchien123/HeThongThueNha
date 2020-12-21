@@ -4,11 +4,21 @@ public class NotifyPayment {
     private String idUser;
     private double price;
     private String type;
+    private boolean isProress;
 
-    public NotifyPayment(String idUser, double price, String type) {
+    public NotifyPayment(String idUser, double price, String type, boolean isProress) {
         this.idUser = idUser;
         this.price = price;
         this.type = type;
+        this.isProress = isProress;
+    }
+
+    public boolean isProress() {
+        return isProress;
+    }
+
+    public void setProress(boolean proress) {
+        isProress = proress;
     }
 
     public String getType() {

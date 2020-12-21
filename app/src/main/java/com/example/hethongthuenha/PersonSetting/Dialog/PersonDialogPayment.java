@@ -2,49 +2,38 @@ package com.example.hethongthuenha.PersonSetting.Dialog;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.example.hethongthuenha.API.PersonAPI;
-import com.example.hethongthuenha.Model.NotifyPayment;
 import com.example.hethongthuenha.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 public class PersonDialogPayment extends Dialog {
     Button btn_ThanhToan, btn_Huy;
     TextView tv_Money, tv_Detail, tv_Name, tv_ID, tv_Email;
-    String sMoney, sDetail, sName, sID, sEmail;
 
     public PersonDialogPayment(@NonNull Context context) {
         super(context);
         setContentView(R.layout.person_dialog_payment);
+        getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
         show();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setControl();
         setData();
         setEvent();
     }
 
     private void setEvent() {
-        tv_Detail.setText(sDetail);
-        tv_Money.setText(sMoney);
-        tv_Name.setText(sName);
-        tv_ID.setText(sID);
-        tv_Email.setText(sEmail);
-
         btn_Huy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,10 +60,10 @@ public class PersonDialogPayment extends Dialog {
     }
 
     private void setData(){
-        sDetail = "Thanh toan tien";
-        sEmail = PersonAPI.getInstance().getEmail();
-        sID = PersonAPI.getInstance().getUid();
-        sMoney = PersonAPI.getInstance().getPoint()+"";
-        sName = PersonAPI.getInstance().getName();
+        tv_Detail.setText("Thanh toán hoa hồng");
+        tv_Money.setText(PersonAPI.getInstance().getMoney());
+        tv_Name.setText(PersonAPI.getInstance().getName());
+        tv_ID.setText(PersonAPI.getInstance().getUid());
+        tv_Email.setText(PersonAPI.getInstance().getEmail());
     }
 }

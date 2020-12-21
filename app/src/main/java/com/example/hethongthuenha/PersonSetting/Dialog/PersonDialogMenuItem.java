@@ -13,11 +13,14 @@ import com.example.hethongthuenha.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class PersonDialogMenuItem extends Dialog {
     LinearLayout lnXoa, lnSua, lnQC, lnDSNguoiDung;
@@ -33,11 +36,11 @@ public class PersonDialogMenuItem extends Dialog {
     public PersonDialogMenuItem(@NonNull Context context, Room room) {
         super(context);
         setContentView(R.layout.person_information_dialog_item_menu);
+        getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         this.room = room;
         this.context = context;
         show();
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,23 +58,27 @@ public class PersonDialogMenuItem extends Dialog {
                 Toast.makeText(context, "Danh Sach Nguoi dung", Toast.LENGTH_LONG).show();
             }
         });
+        DialogProgress progress = new DialogProgress(context,"Đang xóa " + room.getStage1().getTitle());
         lnXoa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firestore.collection("Room").whereEqualTo("room_id", room.getRoom_id()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                firestore.collection("Room").whereEqualTo("room_id", room.getRoom_id()).addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        for (QueryDocumentSnapshot snapshot : queryDocumentSnapshots){
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        progress.show();
+                        for (QueryDocumentSnapshot snapshot : value){
                             firestore.collection("Room").document(snapshot.getId()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     roomDataChanger.removeRoom();
-                                    Toast.makeText(context, "Xoa thành công", Toast.LENGTH_LONG).show();
+                                    progress.cancel();
+                                    Toast.makeText(context, "Xóa thành công", Toast.LENGTH_LONG).show();
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(context, "Lôi khi xóa", Toast.LENGTH_LONG).show();
+                                    progress.cancel();
+                                    Toast.makeText(context, "Lỗi khi xóa", Toast.LENGTH_LONG).show();
                                 }
                             });
                         }

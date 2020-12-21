@@ -47,7 +47,7 @@ public class PersonSettingActivity extends AppCompatActivity {
 
     private void setInformationUser() {
         tvEmail.setText(PersonAPI.getInstance().getEmail());
-        tvMoney.setText(PersonAPI.getInstance().getPoint() + " VND");
+        tvMoney.setText(PersonAPI.getInstance().getMoney());
         tvName.setText(PersonAPI.getInstance().getName());
     }
 
@@ -62,6 +62,7 @@ public class PersonSettingActivity extends AppCompatActivity {
         PersonAPI.getInstance().setName("Cao Van Chien");
         PersonAPI.getInstance().setEmail("chiencao@me.cc");
         PersonAPI.getInstance().setPoint(1000000);
+        PersonAPI.getInstance().setUid("12345resdf2434543");
     }
 
     private void setListItem() {

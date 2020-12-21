@@ -28,6 +28,8 @@ public class PersonDialogPurchase extends Dialog {
     public PersonDialogPurchase(@NonNull Context context) {
         super(context);
         setContentView(R.layout.person_dialog_purchase);
+        getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
         show();
     }
 
@@ -36,6 +38,7 @@ public class PersonDialogPurchase extends Dialog {
         super.onCreate(savedInstanceState);
 
         setControl();
+        setData();
         setEvent();
     }
 
@@ -52,7 +55,7 @@ public class PersonDialogPurchase extends Dialog {
             public void onClick(View v) {
                 if(!edt_Price.getText().toString().equals("")){
                     if(Double.parseDouble(edt_Price.getText().toString()) >= 50000.0){
-                        FirebaseFirestore.getInstance().collection("NotifyPayment").add(new NotifyPayment(personAPI.getUid(), Double.parseDouble(edt_Price.getText().toString()),  "NapTien")).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        FirebaseFirestore.getInstance().collection("NotifyPayment").add(new NotifyPayment(personAPI.getUid(), Double.parseDouble(edt_Price.getText().toString()),  "NapTien", false)).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
                                 Toast.makeText(getContext(), "Gửi yêu cầu thành công", Toast.LENGTH_LONG).show();
@@ -84,5 +87,12 @@ public class PersonDialogPurchase extends Dialog {
 
         btnYes = findViewById(R.id.btn_yes);
         btnCancle = findViewById(R.id.btn_cancle);
+    }
+
+    private void setData(){
+        tvEmail.setText(PersonAPI.getInstance().getEmail());
+        tvID.setText(PersonAPI.getInstance().getUid());
+        tvPrice.setText(PersonAPI.getInstance().getMoney());
+        tvName.setText(PersonAPI.getInstance().getName());
     }
 }

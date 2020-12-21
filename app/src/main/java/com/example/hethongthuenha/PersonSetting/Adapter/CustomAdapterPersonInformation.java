@@ -1,6 +1,7 @@
 package com.example.hethongthuenha.PersonSetting.Adapter;
 
 import android.content.Context;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,7 @@ public class CustomAdapterPersonInformation extends RecyclerView.Adapter<CustomA
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Room room = rooms.get(position);
-        holder.tvNgay.setText(room.getStage1().getType_date()+"");
+        holder.tvNgay.setText((String) DateUtils.getRelativeTimeSpanString(room.getTimeAdded().getSeconds() * 1000));
         holder.tvDiaChi.setText(room.getStage1().getAddress());
         holder.tvName.setText(room.getStage1().getTitle());
         holder.tvPrice.setText(room.getStage1().getPrice()+"");
@@ -48,6 +49,13 @@ public class CustomAdapterPersonInformation extends RecyclerView.Adapter<CustomA
             public void onClick(View view, int position, boolean isLongClick) {
                 if(isLongClick){
                     PersonDialogMenuItem menuItem = new PersonDialogMenuItem(context, room);
+                    menuItem.setRoomDataChanger(new PersonDialogMenuItem.RoomDataChanger() {
+                        @Override
+                        public void removeRoom() {
+                            rooms.remove(room);
+                            notifyDataSetChanged();
+                        }
+                    });
                 }else {
                     Toast.makeText(context, "Chi tiet", Toast.LENGTH_LONG).show();
                 }

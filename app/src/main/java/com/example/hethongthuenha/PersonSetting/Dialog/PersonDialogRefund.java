@@ -28,6 +28,8 @@ public class PersonDialogRefund extends Dialog {
     public PersonDialogRefund(@NonNull Context context) {
         super(context);
         setContentView(R.layout.person_dialog_refund);
+        getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
         show();
     }
 
@@ -35,6 +37,7 @@ public class PersonDialogRefund extends Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setControl();
+        setData();
         setEvent();
     }
 
@@ -52,7 +55,7 @@ public class PersonDialogRefund extends Dialog {
                 if(!edt_Price.getText().toString().equals("")){
                     if(Double.parseDouble(edt_Price.getText().toString()) >= 50000.0){
                         if(Double.parseDouble(edt_Price.getText().toString()) <= personAPI.getPoint()){
-                            FirebaseFirestore.getInstance().collection("NotifyPayment").add(new NotifyPayment(personAPI.getUid(), Double.parseDouble(edt_Price.getText().toString()),  "RutTien")).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            FirebaseFirestore.getInstance().collection("NotifyPayment").add(new NotifyPayment(personAPI.getUid(), Double.parseDouble(edt_Price.getText().toString()),  "RutTien", false)).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
                                     Toast.makeText(getContext(), "Gửi yêu cầu thành công", Toast.LENGTH_LONG).show();
@@ -87,5 +90,12 @@ public class PersonDialogRefund extends Dialog {
 
         btnYes = findViewById(R.id.btn_person_refund_yes);
         btnCancle = findViewById(R.id.btn_person_refund_no);
+    }
+
+    private void setData(){
+        tvEmail.setText(PersonAPI.getInstance().getEmail());
+        tvID.setText(PersonAPI.getInstance().getUid());
+        tvPrice.setText(PersonAPI.getInstance().getMoney());
+        tvName.setText(PersonAPI.getInstance().getName());
     }
 }
