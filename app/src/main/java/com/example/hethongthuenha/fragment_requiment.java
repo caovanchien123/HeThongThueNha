@@ -43,7 +43,7 @@ public class fragment_requiment extends Fragment {
     private Button btnFinish, btnContact, btnCancel;
     private TextView tvRequirementAdded, tvDescription;
     private ProgressDialog progressDialog;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     private DocumentReference ref = db.collection("Requirement").document();
     private RequimentRecyclerView adapter;
     private RecyclerView recyclerView;
