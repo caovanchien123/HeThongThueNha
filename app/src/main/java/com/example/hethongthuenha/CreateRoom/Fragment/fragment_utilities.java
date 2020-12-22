@@ -61,8 +61,8 @@ public class fragment_utilities extends Fragment {
             cbUtilities[i] = view.findViewById(resId);
         }
 
-        if (CreateRoomActivity.roomExist != null) {
-            Room room = CreateRoomActivity.roomExist;
+        if (CreateRoomActivity.roomUpdate != null) {
+            Room room = CreateRoomActivity.roomUpdate;
 
             for (String utilities : room.getStage4().getDescription_utility())
                 for (int i = 0; i < 5; i++)

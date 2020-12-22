@@ -78,8 +78,8 @@ public class fragment_description extends Fragment {
         tipDescription = view.findViewById(R.id.filledDescription);
 
 
-        if (CreateRoomActivity.roomExist != null) {
-            Room room = CreateRoomActivity.roomExist;
+        if (CreateRoomActivity.roomUpdate != null) {
+            Room room = CreateRoomActivity.roomUpdate;
 
             etTitle.setText(room.getStage1().getTitle());
             etDescription.setText(room.getStage1().getDescription());

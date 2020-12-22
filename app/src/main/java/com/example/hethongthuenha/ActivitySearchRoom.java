@@ -6,8 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -26,6 +24,7 @@ import com.example.hethongthuenha.Adapter.RoomRecyclerView;
 import com.example.hethongthuenha.Model.Province;
 import com.example.hethongthuenha.Model.Room;
 import com.example.hethongthuenha.Retrofit.RetrofitClientInstance;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -43,27 +42,36 @@ import io.reactivex.schedulers.Schedulers;
 public class ActivitySearchRoom extends AppCompatActivity {
 
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private List<Room> rooms;
+    //firebasefirestore
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final CollectionReference refRoom = db.collection("Room");
+    //component
     private RoomRecyclerView adapter;
     private RecyclerView recyclerView;
     private TextView tvEmpty;
-    private String title_room = "";
     private EditText edTextSearch;
-    private ProgressDialog progressDialog;
     private LinearLayout linearLayout;
     private Button btn_search_enhance, btn_finish_search, btnPrice, btnAccommodation, btnArea, btnTypeRoom;
-    private boolean isOpen = false;
+    //progressbar
+    private ProgressDialog progressDialog;
+    private AlertDialog.Builder builder;
+    //list room
+    private List<Room> rooms;
+    //retrofit province
     private GetDataProvinceService service;
     private ArrayAdapter<String> provinceArrayAdapter;
     private ArrayList<String> provinces;
     private Spinner spLocation;
-    private AlertDialog.Builder builder;
+
+    //format money
     private NumberFormat formatter = NumberFormat.getCurrencyInstance();
+    //variable
+    private boolean isOpen = false;
+    private String titleRoom, locationRoom, typeRoom;
     private float price, area;
     private int accommodation;
-    private String type_room = "";
-
+    //bound
+    private final int SEARCH_DEFAULT = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,10 +101,11 @@ public class ActivitySearchRoom extends AppCompatActivity {
         provinces = new ArrayList<>();
         spLocation = findViewById(R.id.sp_search_location);
         recyclerView.setAdapter(adapter);
-        title_room = getIntent().getExtras().getString("search_title", "");
-        SearchRoom(title_room);
+        titleRoom = getIntent().getExtras().getString("search_title", "");
+        edTextSearch.setText(titleRoom);
+        SearchRoom(titleRoom);
         this.service = RetrofitClientInstance.getRetrofitInstance().create(GetDataProvinceService.class);
-        SearchEnHance();
+        DialogSearchEnhance();
         OnClickSearchRoom();
     }
 
@@ -117,7 +126,7 @@ public class ActivitySearchRoom extends AppCompatActivity {
                         }
 
 
-                        provinceArrayAdapter = new ArrayAdapter<String>(ActivitySearchRoom.this,
+                        provinceArrayAdapter = new ArrayAdapter<>(ActivitySearchRoom.this,
                                 android.R.layout.simple_spinner_dropdown_item, provinces);
                         spLocation.setAdapter(provinceArrayAdapter);
 
@@ -130,83 +139,60 @@ public class ActivitySearchRoom extends AppCompatActivity {
                 });
     }
 
-    private void PopupSearchEnhance() {
-        isOpen = !isOpen;
-        if (isOpen) {
-            linearLayout.setVisibility(View.VISIBLE);
-            //https://stackoverflow.com/questions/22297073/how-to-programmatically-set-drawableright-on-android-edittext
-            btn_search_enhance.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_arrow_drop_up_24, 0);
-        } else {
-            linearLayout.setVisibility(View.GONE);
-            btn_search_enhance.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_arrow_drop_down_24, 0);
-        }
-    }
-
-    public void InitRoom(String keyword) {
-
-        String getLocation = spLocation.getCount() == 0 || spLocation.getSelectedItem().toString() == "Toàn quốc"
+    public void handleSearchEnhance() {
+        locationRoom = spLocation.getCount() == 0 || spLocation.getSelectedItem().toString() == "Toàn quốc"
                 ? "" : spLocation.getSelectedItem().toString();
 
         //parse format price
         try {
             price = (Long) formatter.parse(btnPrice.getText().toString());
         } catch (ParseException e) {
-            price = -1;
+            price = SEARCH_DEFAULT;
         }
 
         //accommodation
         accommodation = btnAccommodation.getText().toString().equals("Sức chứa")
-                || btnAccommodation.getText().toString().equals("Tất cả") ? -1 :
+                || btnAccommodation.getText().toString().equals("Tất cả") ? SEARCH_DEFAULT :
                 Integer.parseInt(btnAccommodation.getText().toString());
 
         //area
         area = btnArea.getText().toString().equals("Diện tích") ||
-                btnArea.getText().toString().equals("Tất cả") ? -1 : Float.parseFloat(btnArea.getText()
+                btnArea.getText().toString().equals("Tất cả") ? SEARCH_DEFAULT : Float.parseFloat(btnArea.getText()
                 .toString().split("m2")[0]);
 
         //type_room
-        type_room = btnTypeRoom.getText().toString().equals("Loại phòng")
+        typeRoom = btnTypeRoom.getText().toString().equals("Loại phòng")
                 || btnTypeRoom.getText().toString().equals("Tất cả") ? "" :
                 btnTypeRoom.getText().toString().toLowerCase();
+    }
 
+    public void InitRoom(String keyword) {
 
-        Log.d("SIMPLE", "Price" + price + "|Accommodation:" +
-                accommodation + "|Area:" + area + "|Type_room:" + type_room);
-
-        db.collection("Room").orderBy("timeAdded", Query.Direction.DESCENDING)
+        handleSearchEnhance();
+        refRoom.orderBy("timeAdded", Query.Direction.DESCENDING)
                 .get().addOnSuccessListener(queryDocumentSnapshots -> {
             rooms.clear();
             for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                 Room room = documentSnapshot.toObject(Room.class);
 
                 String title = keyword.toLowerCase();
-                String location = getLocation.toLowerCase();
-                float price_check, area_check;
-                int accommodation_check;
+                String location = locationRoom.toLowerCase();
+
                 if (room.getStage1().getTitle().toLowerCase().contains(title) &&
                         room.getStage1().getAddress().toLowerCase().contains(location) &&
-                        room.getStage1().getType_room().toLowerCase().contains(type_room)) {
-                    if (price != -1) {
-                        price_check = price;
-                    } else {
-                        price_check = Float.MAX_VALUE;
-                    }
+                        room.getStage1().getType_room().toLowerCase().contains(typeRoom)) {
+                    if (price == SEARCH_DEFAULT)
+                        price = Float.MAX_VALUE;
 
-                    if (accommodation != -1) {
-                        accommodation_check = accommodation;
-                    } else {
-                        accommodation_check = Integer.MAX_VALUE;
-                    }
+                    if (accommodation == SEARCH_DEFAULT)
+                        accommodation = Integer.MAX_VALUE;
 
-                    if (area != -1) {
-                        area_check = area;
-                    } else {
-                        area_check = Float.MAX_VALUE;
-                    }
+                    if (area != SEARCH_DEFAULT)
+                        area = Float.MAX_VALUE;
 
-                    if (room.getStage1().getAccommodation() <= accommodation_check &&
-                            room.getStage1().getPrice() <= price_check &&
-                            room.getStage1().getArea() <= area_check)
+                    if (room.getStage1().getAccommodation() <= accommodation &&
+                            room.getStage1().getPrice() <= price &&
+                            room.getStage1().getArea() <= area)
                         rooms.add(room);
                 }
 
@@ -226,7 +212,7 @@ public class ActivitySearchRoom extends AppCompatActivity {
         }).addOnFailureListener(e -> Log.d(this.getClass().getName(), "InitRoom: " + e.getMessage()));
     }
 
-    private void SearchEnHance() {
+    private void DialogSearchEnhance() {
         btnPrice.setOnClickListener(v -> {
             DialogPrice();
         });
@@ -244,14 +230,6 @@ public class ActivitySearchRoom extends AppCompatActivity {
         });
     }
 
-    private void ClearSearch(){
-        spLocation.setSelection(0);
-        btnAccommodation.setText("Sức chứa");
-        btnArea.setText("Diện tích");
-        btnPrice.setText("Giá");
-        btnTypeRoom.setText("Loại phòng");
-    }
-
     private void OnClickSearchRoom() {
         btn_search_enhance.setOnClickListener(v -> {
             PopupSearchEnhance();
@@ -262,7 +240,7 @@ public class ActivitySearchRoom extends AppCompatActivity {
             PopupSearchEnhance();
             ClearSearch();
         });
-
+        //keyword search
         edTextSearch.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH ||
                     actionId == EditorInfo.IME_ACTION_DONE ||
@@ -278,10 +256,32 @@ public class ActivitySearchRoom extends AppCompatActivity {
         });
     }
 
+
+    private void PopupSearchEnhance() {
+        isOpen = !isOpen;
+        if (isOpen) {
+            linearLayout.setVisibility(View.VISIBLE);
+            //https://stackoverflow.com/questions/22297073/how-to-programmatically-set-drawableright-on-android-edittext
+            btn_search_enhance.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_arrow_drop_up_24, 0);
+        } else {
+            linearLayout.setVisibility(View.GONE);
+            btn_search_enhance.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_arrow_drop_down_24, 0);
+        }
+    }
+
+    private void ClearSearch() {
+        spLocation.setSelection(0);
+        btnAccommodation.setText("Sức chứa");
+        btnArea.setText("Diện tích");
+        btnPrice.setText("Giá");
+        btnTypeRoom.setText("Loại phòng");
+    }
+
     private void SearchRoom(String keyword) {
         progressDialog.show();
         InitRoom(keyword);
     }
+
 
     private void DialogPrice() {
         builder = new AlertDialog.Builder(this);

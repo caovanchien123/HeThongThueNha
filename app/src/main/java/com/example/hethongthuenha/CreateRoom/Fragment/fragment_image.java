@@ -5,12 +5,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,7 +17,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,17 +29,10 @@ import com.example.hethongthuenha.CreateRoom.CreateRoomActivity;
 import com.example.hethongthuenha.Model.Image_Room;
 import com.example.hethongthuenha.Model.Room;
 import com.example.hethongthuenha.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.Timestamp;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
-import java.io.File;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -112,8 +100,8 @@ public class fragment_image extends Fragment {
             });
         }
 
-        if (CreateRoomActivity.roomExist != null) {
-            Room room = CreateRoomActivity.roomExist;
+        if (CreateRoomActivity.roomUpdate != null) {
+            Room room = CreateRoomActivity.roomUpdate;
             int i = 0;
             for (String url : room.getStage3().getImagesURL()) {
                 ImageView imageView = listImgRoom[i++];
@@ -129,7 +117,7 @@ public class fragment_image extends Fragment {
         btnFinishStage3.setOnClickListener(v -> {
             if (isValid()) {
                 progressDialog.show();
-                if (CreateRoomActivity.roomExist == null)
+                if (CreateRoomActivity.roomUpdate == null)
                     SaveImage();
                 else
                     ChangeFragment();

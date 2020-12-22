@@ -6,7 +6,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,9 +36,9 @@ public class CreateRoomActivity extends AppCompatActivity implements IDataCommun
     private TextView[] tvStage = new TextView[4];
     private static FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Room room;
-    static DocumentReference ref = db.collection("Room").document();
-    public static Room roomExist;
-    public static final String myID = ref.getId();
+    static DocumentReference refRoom = db.collection("Room").document();
+    public static Room roomUpdate;
+    public static final String myID = refRoom.getId();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,9 +84,9 @@ public class CreateRoomActivity extends AppCompatActivity implements IDataCommun
         String UpdateMyRoom = getIntent().getStringExtra("update");
 
         if (UpdateMyRoom != null) {
-            roomExist = (Room) getIntent().getSerializableExtra("room");
+            roomUpdate = (Room) getIntent().getSerializableExtra("room");
         } else
-            roomExist = null;
+            roomUpdate = null;
     }
 
     private void setFragment() {
@@ -133,21 +132,20 @@ public class CreateRoomActivity extends AppCompatActivity implements IDataCommun
     public void Utilities(Utilities_Room dataStage4) {
         room.setStage4(dataStage4);
         room.setTimeAdded(new Timestamp(new Date()));
-        if (roomExist == null) {
+        if (roomUpdate == null) {
             db.collection("Room").add(room)
                     .addOnSuccessListener(documentReference ->
                             Toast.makeText(CreateRoomActivity.this, "Tạo thành công", Toast.LENGTH_SHORT).show()).
                     addOnFailureListener(e ->
                             Toast.makeText(CreateRoomActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show());
-        } else if (roomExist != null) {
-            room.setRoom_id(roomExist.getRoom_id());
+        } else if (roomUpdate != null) {
+            room.setRoom_id(roomUpdate.getRoom_id());
             room.setTimeAdded((Timestamp) getIntent().getExtras().get("roomAdded"));
             db.collection("Room")
                     .whereEqualTo("room_id", room.getRoom_id())
                     .get().addOnCompleteListener(v -> {
                 if (v.isSuccessful()) {
                     for (QueryDocumentSnapshot value : v.getResult()) {
-                        Log.d("Test", "Utilities: " + value.getId() + "||" + room.getRoom_id());
                         db.collection("Room").document(value.getId())
                                 .set(room).addOnCompleteListener(c -> {
                             Toast.makeText(this, "Sửa thành công", Toast.LENGTH_SHORT).show();
