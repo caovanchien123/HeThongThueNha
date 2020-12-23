@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hethongthuenha.API.PersonAPI;
@@ -30,6 +31,10 @@ public class RequimentRecyclerView extends RecyclerView.Adapter<RequimentRecycle
     public ListenerRequirement listenerEdit;
     public ListenerRequirement listenerCardView;
     NumberFormat formatter = NumberFormat.getCurrencyInstance();
+
+    public RequimentRecyclerView(FragmentActivity activity, List<Requirement> requirements) {
+    }
+
     public interface ListenerRequirement {
         public void getRequirement(Requirement requirement);
     }
