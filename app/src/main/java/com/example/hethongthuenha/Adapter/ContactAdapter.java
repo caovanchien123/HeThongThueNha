@@ -1,6 +1,5 @@
-package com.example.hethongthuenha;
+package com.example.hethongthuenha.Adapter;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.hethongthuenha.Adapter.PhongTro;
+import com.example.hethongthuenha.Model.PhongTro;
+import com.example.hethongthuenha.R;
 
 import java.util.ArrayList;
 

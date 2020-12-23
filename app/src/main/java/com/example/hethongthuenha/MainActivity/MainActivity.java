@@ -12,10 +12,12 @@ import android.os.Bundle;
 
 import com.example.hethongthuenha.API.PersonAPI;
 ;
+import com.example.hethongthuenha.Adminstrator.ActivityAdmintrators;
 import com.example.hethongthuenha.MainActivity.Fragment.Chat.fragment_list_chat;
 import com.example.hethongthuenha.MainActivity.Fragment.MainRoom.fragment_main_room;
 import com.example.hethongthuenha.MainActivity.Fragment.Notification.fragment_notification;
 import com.example.hethongthuenha.MainActivity.Fragment.Requiment.fragment_requiment;
+import com.example.hethongthuenha.PersonSetting.PersonSettingActivity;
 import com.example.hethongthuenha.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private void Event() {
         toolbar.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.mnPerson){
-                //startActivity(new Intent(MainActivity.this, ActivitySettingPerson.class));
+                startActivity(new Intent(MainActivity.this, PersonSettingActivity.class));
             }
 
 
@@ -81,8 +83,8 @@ public class MainActivity extends AppCompatActivity {
                 fragment = new fragment_list_chat();
                 break;
             case R.id.mnAdmin:
-               // Intent intent = new Intent(MainActivity.this, ActivityAdmintrators.class);
-                //startActivity(intent);
+               Intent intent = new Intent(MainActivity.this, ActivityAdmintrators.class);
+               startActivity(intent);
                 finish();
                 break;
         }

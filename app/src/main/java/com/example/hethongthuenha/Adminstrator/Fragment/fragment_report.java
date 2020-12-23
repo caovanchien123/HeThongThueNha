@@ -1,19 +1,24 @@
-package com.example.hethongthuenha;
+package com.example.hethongthuenha.Adminstrator.Fragment;
 
 import android.os.Bundle;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.hethongthuenha.Adapter.PhongTro;
+import com.example.hethongthuenha.Model.PhongTro;
+import com.example.hethongthuenha.Adapter.ContactAdapter;
+import com.example.hethongthuenha.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.CollectionReference;
@@ -23,8 +28,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity {
-
+public class fragment_report extends Fragment {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     ContactAdapter contactAdapterList;
     RecyclerView contactView;
@@ -37,19 +41,23 @@ public class MainActivity extends AppCompatActivity {
     //add vao fire base
     CollectionReference ref = db.collection("NhaTro");
 
+    public fragment_report() {
+        // Required empty public constructor
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_report, container, false);
         PhongTroArrayList = new ArrayList<>();
 
-        setContentView(R.layout.activity_main);
-
         super.onCreate(savedInstanceState);
-        roomName = findViewById(R.id.txtTenPhong);
-        roomPrice = findViewById(R.id.txtGia);
-        btnAdd = findViewById(R.id.btnAdd);
-        contactView = findViewById(R.id.ContactView);
+        roomName = view.findViewById(R.id.txtTenPhong);
+        roomPrice = view.findViewById(R.id.txtGia);
+        btnAdd = view.findViewById(R.id.btnAdd);
+        contactView = view.findViewById(R.id.ContactView);
         contactView.setHasFixedSize(true);
-        contactView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        contactView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         btnAdd.setOnClickListener(v -> {
             String strRoomName = "", strRoomPrice = "";
 
@@ -60,12 +68,11 @@ public class MainActivity extends AppCompatActivity {
             ref.add(phongtro).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                 @Override
                 public void onSuccess(DocumentReference documentReference) {
-                    Toast.makeText(MainActivity.this, "Data Added@", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Data Added@", Toast.LENGTH_SHORT).show();
                 }
             });
         });
-
-
+        return view;
     }
 
     private void Init() {
@@ -77,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         obj.setRoomName(strRoomName);
         obj.setRoomPrice(strRoomPrice);
         PhongTroArrayList.add(obj);
-        contactAdapterList = new ContactAdapter(this, PhongTroArrayList);
+        contactAdapterList = new ContactAdapter(getContext(), PhongTroArrayList);
         contactView.setAdapter(contactAdapterList);
 
     }
@@ -85,14 +92,14 @@ public class MainActivity extends AppCompatActivity {
     public void ShowDialogReport() {
         btnBaoCao.setOnClickListener(v ->
         {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
             View viewLayout = getLayoutInflater().inflate(R.layout.layout_report, null);
             builder.setView(viewLayout);
             spReport = viewLayout.findViewById(R.id.sp_report);
             et_description_report = viewLayout.findViewById(R.id.et_description_report);
             btnCancelReport = viewLayout.findViewById(R.id.btn_cancel_report);
             btnSendReport = viewLayout.findViewById(R.id.btn_send_report);
-            btnBaoCao = findViewById(R.id.btnBaoCao);
+            btnBaoCao = viewLayout.findViewById(R.id.btnBaoCao);
             final AlertDialog show = builder.show();
             btnCancelReport.setOnClickListener(c -> show.dismiss());
             btnSendReport.setOnClickListener(c -> {
@@ -104,6 +111,4 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
-
 }

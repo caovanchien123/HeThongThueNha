@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.hethongthuenha.ModelA.Room;
+import com.example.hethongthuenha.Model.Room;
 import com.example.hethongthuenha.PersonSetting.Adapter.CustomAdapterPersonInformation;
 import com.example.hethongthuenha.PersonSetting.Dialog.DialogProgress;
 import com.example.hethongthuenha.PersonSetting.Dialog.PersonDialogMenuItem;
