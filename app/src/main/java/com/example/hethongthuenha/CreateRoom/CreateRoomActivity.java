@@ -1,0 +1,159 @@
+package com.example.hethongthuenha.CreateRoom;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentTransaction;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.hethongthuenha.API.PersonAPI;
+import com.example.hethongthuenha.CreateRoom.Fragment.IDataCommunication;
+import com.example.hethongthuenha.CreateRoom.Fragment.fragment_description;
+import com.example.hethongthuenha.MainActivity.MainActivity;
+import com.example.hethongthuenha.Model.Description_Room;
+import com.example.hethongthuenha.Model.Image_Room;
+import com.example.hethongthuenha.Model.LivingExpenses_Room;
+import com.example.hethongthuenha.Model.Room;
+import com.example.hethongthuenha.Model.Utilities_Room;
+import com.example.hethongthuenha.R;
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
+import java.util.Date;
+
+public class CreateRoomActivity extends AppCompatActivity implements IDataCommunication {
+
+    private TextView tvStage1, tvStage2, tvStage3, tvStage4;
+    private ImageView imgStage1, imgStage2, imgStage3, imgStage4;
+    //private Button btnFinishStage;
+    private Toolbar toolbar;
+    private TextView[] tvStage = new TextView[4];
+    private static FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private Room room;
+    static DocumentReference refRoom = db.collection("Room").document();
+    public static Room roomUpdate;
+    public static final String myID = refRoom.getId();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_create_room);
+        init();
+        setFragment();
+    }
+
+
+    private void init() {
+        tvStage1 = findViewById(R.id.tvStage1);
+        tvStage2 = findViewById(R.id.tvStage2);
+        tvStage3 = findViewById(R.id.tvStage3);
+        tvStage4 = findViewById(R.id.tvStage4);
+
+        for (int i = 0; i < 4; i++) {
+            String textViewStageId = "tvStage" + (i + 1);
+            int resId = getResources().getIdentifier(textViewStageId, "id", getPackageName());
+            tvStage[i] = findViewById(resId);
+        }
+
+        imgStage1 = findViewById(R.id.imgStage1);
+        imgStage2 = findViewById(R.id.imgStage2);
+        imgStage3 = findViewById(R.id.imgStage3);
+        imgStage4 = findViewById(R.id.imgStage4);
+
+        toolbar = findViewById(R.id.toolbar);
+
+
+        toolbar.setOnMenuItemClickListener(item -> {
+            if (item.getItemId() == R.id.mnCancel)
+                startActivity(new Intent(CreateRoomActivity.this, MainActivity.class));
+            return false;
+        });
+
+        room = new Room();
+
+        room.setRoom_id(myID);
+        room.setPerson_id(PersonAPI.getInstance().getUid());
+        room.setOrder(1);
+
+        String UpdateMyRoom = getIntent().getStringExtra("update");
+
+        if (UpdateMyRoom != null) {
+            roomUpdate = (Room) getIntent().getSerializableExtra("room");
+        } else
+            roomUpdate = null;
+    }
+
+    private void setFragment() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.add(R.id.frameContainer, new fragment_description());
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.addToBackStack(null);
+        ft.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+            startActivity(new Intent(CreateRoomActivity.this, MainActivity.class));
+            finish();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        finish();
+    }
+
+
+    @Override
+    public void Description(Description_Room dataStage1) {
+        room.setStage1(dataStage1);
+    }
+
+    @Override
+    public void LivingExpenses(LivingExpenses_Room dataStage2) {
+        room.setStage2(dataStage2);
+    }
+
+    @Override
+    public void Image(Image_Room dataStage3) {
+        room.setStage3(dataStage3);
+    }
+
+    @Override
+    public void Utilities(Utilities_Room dataStage4) {
+        room.setStage4(dataStage4);
+        room.setTimeAdded(new Timestamp(new Date()));
+        if (roomUpdate == null) {
+            db.collection("Room").add(room)
+                    .addOnSuccessListener(documentReference ->
+                            Toast.makeText(CreateRoomActivity.this, "Tạo thành công", Toast.LENGTH_SHORT).show()).
+                    addOnFailureListener(e ->
+                            Toast.makeText(CreateRoomActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show());
+        } else if (roomUpdate != null) {
+            room.setRoom_id(roomUpdate.getRoom_id());
+            room.setTimeAdded((Timestamp) getIntent().getExtras().get("roomAdded"));
+            db.collection("Room")
+                    .whereEqualTo("room_id", room.getRoom_id())
+                    .get().addOnCompleteListener(v -> {
+                if (v.isSuccessful()) {
+                    for (QueryDocumentSnapshot value : v.getResult()) {
+                        db.collection("Room").document(value.getId())
+                                .set(room).addOnCompleteListener(c -> {
+                            Toast.makeText(this, "Sửa thành công", Toast.LENGTH_SHORT).show();
+                        });
+                    }
+                }
+            });
+        }
+
+    }
+}

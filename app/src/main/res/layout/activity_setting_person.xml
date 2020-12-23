@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ActivitySettingPerson">
+
+    <LinearLayout
+        android:padding="16dp"
+        android:layout_marginTop="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_avatar_person"
+            android:layout_width="100sp"
+            android:layout_height="100sp"
+            android:src="@drawable/ic_baseline_person_24"/>
+        <LinearLayout
+            android:layout_marginLeft="20sp"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_name_setting_person"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:layout_weight="1"
+                android:text=""/>
+            <TextView
+                android:id="@+id/tv_email_setting_person"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_weight="1"
+                android:text=""/>
+            <TextView
+                android:id="@+id/tv_point_setting_person"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:text="0.0 đ"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lvSettingPerson"
+        android:layout_width="match_parent"
+        android:dividerHeight="12sp"
+        android:divider="@color/white"
+        android:layout_height="match_parent"/>
+</LinearLayout>
