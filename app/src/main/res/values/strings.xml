@@ -1,8 +1,4 @@
 <resources>
-    <string name="app_name">Hệ Thống Thuê Nhà</string>
-    <array name="spTypeRoom"></array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="app_name">HeThongThueNha</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -40,4 +36,5 @@
 
     <string name="navigation_open_drawer">Navigation Open</string>
     <string name="navigation_close_drawer">Navigation Close</string>
+    <string name="msg" formatted="true"> Tokens:%s1</string>
 </resources>

@@ -103,6 +103,10 @@ public class BookRoomRecyclerView extends RecyclerView.Adapter<BookRoomRecyclerV
         holder.imgRemove.setOnClickListener(v -> {
             NotificationChooseDelete(bookRoom);
         });
+
+        if (bookRoom.isConfirm()) {
+            holder.tvAdded.setVisibility(View.GONE);
+        }
     }
 
     private AlertDialog NotficationChooseConfirm(BookRoom bookRoom) {

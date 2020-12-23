@@ -2,12 +2,15 @@ package com.example.hethongthuenha.PersonSetting.Dialog;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.example.hethongthuenha.ModelA.Room;
+import com.example.hethongthuenha.ActivityRoomDetail;
+import com.example.hethongthuenha.CreateRoom.CreateRoomActivity;
+import com.example.hethongthuenha.Model.Room;
 import com.example.hethongthuenha.PersonSetting.Adapter.CustomAdapterPersonInformation;
 import com.example.hethongthuenha.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -90,6 +93,11 @@ public class PersonDialogMenuItem extends Dialog {
         lnSua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(context, CreateRoomActivity.class);
+                intent.putExtra("update", room.getRoom_id());
+                intent.putExtra("room", room);
+                intent.putExtra("roomAdded", room.getTimeAdded());
+                context.startActivity(intent);
                 Toast.makeText(context, "Sua", Toast.LENGTH_LONG).show();
             }
         });

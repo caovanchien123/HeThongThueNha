@@ -187,7 +187,7 @@ public class ActivitySearchRoom extends AppCompatActivity {
                     if (accommodation == SEARCH_DEFAULT)
                         accommodation = Integer.MAX_VALUE;
 
-                    if (area != SEARCH_DEFAULT)
+                    if (area == SEARCH_DEFAULT)
                         area = Float.MAX_VALUE;
 
                     if (room.getStage1().getAccommodation() <= accommodation &&

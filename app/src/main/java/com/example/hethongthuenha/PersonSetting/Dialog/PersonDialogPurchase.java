@@ -19,6 +19,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.NumberFormat;
+
 public class PersonDialogPurchase extends Dialog {
     private TextView tvName, tvEmail, tvID, tvPrice;
     private EditText edt_Price;
@@ -90,9 +92,10 @@ public class PersonDialogPurchase extends Dialog {
     }
 
     private void setData(){
+        NumberFormat formatter = NumberFormat.getCurrencyInstance();
         tvEmail.setText(PersonAPI.getInstance().getEmail());
         tvID.setText(PersonAPI.getInstance().getUid());
-        tvPrice.setText(PersonAPI.getInstance().getMoney());
+        tvPrice.setText(formatter.format(PersonAPI.getInstance().getPoint()));
         tvName.setText(PersonAPI.getInstance().getName());
     }
 }

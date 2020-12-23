@@ -31,6 +31,7 @@
                 android:textSize="20sp"
                 android:textColor="@color/black"
                 android:layout_weight="1"
+                android:fontFamily="@font/belleza"
                 android:text=""/>
             <TextView
                 android:id="@+id/tv_email_setting_person"
@@ -38,6 +39,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:layout_weight="1"
+                android:fontFamily="@font/belleza"
                 android:text=""/>
             <TextView
                 android:id="@+id/tv_point_setting_person"
@@ -46,6 +48,7 @@
                 android:textSize="12sp"
                 android:gravity="center"
                 android:layout_weight="1"
+                android:fontFamily="@font/belleza"
                 android:text="0.0 đ"/>
         </LinearLayout>
     </LinearLayout>

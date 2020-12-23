@@ -25,12 +25,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hethongthuenha.API.PersonAPI;
 import com.example.hethongthuenha.ActivityRoomDetail;
+import com.example.hethongthuenha.ActivitySettingPerson;
 import com.example.hethongthuenha.CreateRoom.CreateRoomActivity;
 import com.example.hethongthuenha.Model.Ads;
 import com.example.hethongthuenha.Model.BookRoom;
 import com.example.hethongthuenha.Model.CreditCard;
 import com.example.hethongthuenha.Model.Description_Room;
 import com.example.hethongthuenha.Model.Image_Room;
+import com.example.hethongthuenha.Model.Notification;
 import com.example.hethongthuenha.Model.Room;
 import com.example.hethongthuenha.R;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -43,7 +45,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
-
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -53,7 +54,6 @@ import java.util.Date;
 import java.util.List;
 
 public class RoomRecyclerView extends RecyclerView.Adapter<RoomRecyclerView.MyViewHolder> {
-
 
 
     private List<Room> rooms;
@@ -103,13 +103,19 @@ public class RoomRecyclerView extends RecyclerView.Adapter<RoomRecyclerView.MyVi
         String address = stage1.getAddress();
         String price = formatter.format(stage1.getPrice());
         String type_room = stage1.getType_room();
-        String type_date = stage1.getType_date();
         String urlImg = stage3.getImagesURL().get(0);
 
         holder.tvTitle.setText(title);
         holder.tvAddress.setText(address);
-        holder.tvPrice.setText(price + "/" + type_date);
+        holder.tvPrice.setText(price + "/Tháng" );
         holder.tvTypeRoom.setText(type_room);
+
+
+        if(room.getOrder()==2){
+            holder.tvTitle.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.vip,0,0,0);
+        }else{
+            holder.tvTitle.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0,0,0);
+        }
 
         String timeAgo = (String) DateUtils.getRelativeTimeSpanString(room.getTimeAdded()
                 .getSeconds() * 1000);
@@ -251,7 +257,7 @@ public class RoomRecyclerView extends RecyclerView.Adapter<RoomRecyclerView.MyVi
 
 
                 } else {
-                    //ActivitySettingPerson.AddPoint("Bạn không đủ tiền", context);
+                    ActivitySettingPerson.AddPoint("Bạn không đủ tiền", context);
                 }
             } catch (Exception ex) {
                 Toast.makeText(context, "Lỗi !", Toast.LENGTH_SHORT).show();

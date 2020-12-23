@@ -6,7 +6,6 @@ public class Description_Room implements Serializable{
     private String title;
     private String description;
     private String address;
-    private String type_date;
     private double price;
     private double area;
     private int accommodation;
@@ -16,11 +15,10 @@ public class Description_Room implements Serializable{
     public Description_Room() {
     }
 
-    public Description_Room(String title, String description, String address, String type_date, double price, double area, int accommodation, int amout, String type_room) {
+    public Description_Room(String title, String description, String address, double price, double area, int accommodation, int amout, String type_room) {
         this.title = title;
         this.description = description;
         this.address = address;
-        this.type_date = type_date;
         this.price = price;
         this.area = area;
         this.accommodation = accommodation;
@@ -52,13 +50,6 @@ public class Description_Room implements Serializable{
         this.address = address;
     }
 
-    public String getType_date() {
-        return type_date;
-    }
-
-    public void setType_date(String type_date) {
-        this.type_date = type_date;
-    }
 
     public double getPrice() {
         return price;
@@ -106,7 +97,6 @@ public class Description_Room implements Serializable{
                 "title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", address='" + address + '\'' +
-                ", type_date='" + type_date + '\'' +
                 ", price=" + price +
                 ", area=" + area +
                 ", accommodation=" + accommodation +

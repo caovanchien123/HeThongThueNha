@@ -1,6 +1,7 @@
 package com.example.hethongthuenha.PersonSetting.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +13,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.hethongthuenha.ModelA.Room;
+
+import com.example.hethongthuenha.ActivityRoomDetail;
+import com.example.hethongthuenha.Model.Room;
 import com.example.hethongthuenha.PersonSetting.Dialog.PersonDialogMenuItem;
 import com.example.hethongthuenha.R;
 import com.squareup.picasso.Picasso;
@@ -57,7 +60,9 @@ public class CustomAdapterPersonInformation extends RecyclerView.Adapter<CustomA
                         }
                     });
                 }else {
-                    Toast.makeText(context, "Chi tiet", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(context, ActivityRoomDetail.class);
+                    intent.putExtra("room", room);
+                    context.startActivity(intent);
                 }
             }
         });

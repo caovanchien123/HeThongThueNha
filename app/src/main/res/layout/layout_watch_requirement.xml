@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20sp"
                 android:background="@android:color/transparent"
-                android:text="Liên Hệ"
+                android:text="Trả lời"
                 android:textColor="@android:color/holo_orange_dark" />
 
         </LinearLayout>

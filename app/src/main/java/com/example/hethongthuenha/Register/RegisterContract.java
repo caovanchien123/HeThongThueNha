@@ -1,18 +1,16 @@
 package com.example.hethongthuenha.Register;
 
+import com.google.firebase.firestore.QuerySnapshot;
+
 public interface RegisterContract {
 
     interface Presenter{
         void RegisterAccount(String email, String password, String username, String contact);
-        //void InitProvince();
-        //void InitDistrict(int id_tinh);
     }
 
     interface View{
         void registerSuccess();
         void registerFail(String error);
         void registerPending();
-//        void repositoryProvince(List<Province> provinces);
-//        void repositoryDistrict(List<District> districts);
     }
 }

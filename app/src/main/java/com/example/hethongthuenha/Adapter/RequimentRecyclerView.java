@@ -55,8 +55,8 @@ public class RequimentRecyclerView extends RecyclerView.Adapter<RequimentRecycle
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            imgPerson = itemView.findViewById(R.id.img_custom_person_requirement);
-            tvName = itemView.findViewById(R.id.tv_custom_name_requirement);
+            imgPerson = itemView.findViewById(R.id.img_custom_person_requiment);
+            tvName = itemView.findViewById(R.id.tv_custom_name_requiment);
             tvAddress = itemView.findViewById(R.id.tv_custom_address_requiment);
             tvPrice = itemView.findViewById(R.id.tv_custom_price_requiment);
             tvTypeRoom = itemView.findViewById(R.id.tv_custom_type_room_requiment);
@@ -69,7 +69,7 @@ public class RequimentRecyclerView extends RecyclerView.Adapter<RequimentRecycle
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.custom_requirement, parent, false);
+        View view = inflater.inflate(R.layout.custom_requiment, parent, false);
         return new MyViewHolder(view);
     }
 

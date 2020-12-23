@@ -13,13 +13,15 @@ import android.widget.Toast;
 
 import com.example.hethongthuenha.API.PersonAPI;
 import com.example.hethongthuenha.Model.PersonItemMenu;
-import com.example.hethongthuenha.ModelA.Model.Person;
 import com.example.hethongthuenha.PersonSetting.Adapter.CustomAdapterPersonMenu;
 import com.example.hethongthuenha.PersonSetting.Dialog.PersonDialogPayment;
 import com.example.hethongthuenha.PersonSetting.Dialog.PersonDialogPurchase;
 import com.example.hethongthuenha.PersonSetting.Dialog.PersonDialogRefund;
 import com.example.hethongthuenha.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class PersonSettingActivity extends AppCompatActivity {
@@ -29,7 +31,7 @@ public class PersonSettingActivity extends AppCompatActivity {
     CustomAdapterPersonMenu personItem;
     String sName, sEmail;
     Double dMoney;
-
+    FirebaseAuth auth = FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +48,9 @@ public class PersonSettingActivity extends AppCompatActivity {
     }
 
     private void setInformationUser() {
+        NumberFormat formatter = NumberFormat.getCurrencyInstance();
         tvEmail.setText(PersonAPI.getInstance().getEmail());
-        tvMoney.setText(PersonAPI.getInstance().getMoney());
+        tvMoney.setText(formatter.format(PersonAPI.getInstance().getPoint()));
         tvName.setText(PersonAPI.getInstance().getName());
     }
 
@@ -96,6 +99,7 @@ public class PersonSettingActivity extends AppCompatActivity {
                         PersonDialogRefund dialogRefund = new PersonDialogRefund(PersonSettingActivity.this);
                         break;
                     case 6:
+                        auth.signOut();
                         Toast.makeText(getApplicationContext(), "4", Toast.LENGTH_SHORT).show();
                         break;
                 }

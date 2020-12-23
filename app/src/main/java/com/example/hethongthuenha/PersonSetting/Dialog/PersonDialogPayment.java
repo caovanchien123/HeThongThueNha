@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import com.example.hethongthuenha.API.PersonAPI;
 import com.example.hethongthuenha.R;
 
+import java.text.NumberFormat;
+
 public class PersonDialogPayment extends Dialog {
     Button btn_ThanhToan, btn_Huy;
     TextView tv_Money, tv_Detail, tv_Name, tv_ID, tv_Email;
@@ -60,8 +62,9 @@ public class PersonDialogPayment extends Dialog {
     }
 
     private void setData(){
+        NumberFormat formatter = NumberFormat.getCurrencyInstance();
         tv_Detail.setText("Thanh toán hoa hồng");
-        tv_Money.setText(PersonAPI.getInstance().getMoney());
+        tv_Money.setText(formatter.format(PersonAPI.getInstance().getPoint()));
         tv_Name.setText(PersonAPI.getInstance().getName());
         tv_ID.setText(PersonAPI.getInstance().getUid());
         tv_Email.setText(PersonAPI.getInstance().getEmail());

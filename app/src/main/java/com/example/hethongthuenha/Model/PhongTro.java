@@ -1,4 +1,4 @@
-package com.example.hethongthuenha.Adapter;
+package com.example.hethongthuenha.Model;
 
 public class PhongTro {
     String roomName,roomPrice;

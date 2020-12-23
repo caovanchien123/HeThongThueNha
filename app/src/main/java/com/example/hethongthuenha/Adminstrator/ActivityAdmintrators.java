@@ -24,6 +24,7 @@ import com.example.hethongthuenha.Adminstrator.Fragment.fragment_report;
 import com.example.hethongthuenha.Adminstrator.Fragment.fragmment_history_credit;
 import com.example.hethongthuenha.MainActivity.MainActivity;
 import com.example.hethongthuenha.R;
+import com.example.hethongthuenha.Adminstrator.Fragment.fragment_setting_account;
 import com.google.android.material.navigation.NavigationView;
 
 public class ActivityAdmintrators extends AppCompatActivity {
@@ -79,8 +80,12 @@ public class ActivityAdmintrators extends AppCompatActivity {
                 fragment = new fragment_pay();
                 toolbar.setTitle("Thanh Toán");
                 break;
-            case R.id.mnAccount:
+            case R.id.mnMember:
                 fragment = new fragment_account();
+                toolbar.setTitle("Tài khoản thành viên");
+                break;
+            case R.id.mnSettingMember:
+                fragment = new fragment_setting_account();
                 toolbar.setTitle("Quản lý tài khoản");
                 break;
             case R.id.mnAds:

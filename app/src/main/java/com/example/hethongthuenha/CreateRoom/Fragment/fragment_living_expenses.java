@@ -15,11 +15,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.hethongthuenha.CreateRoom.CreateRoomActivity;
 import com.example.hethongthuenha.Model.LivingExpenses_Room;
 import com.example.hethongthuenha.Model.Room;
 import com.example.hethongthuenha.R;
+
+import java.util.ArrayList;
 
 
 public class fragment_living_expenses extends Fragment {
@@ -65,8 +68,8 @@ public class fragment_living_expenses extends Fragment {
 
         Button btFinishStage2 = view.findViewById(R.id.btnFinishStage2);
 
-        if (CreateRoomActivity.roomUpdate != null) {
-            Room room = CreateRoomActivity.roomUpdate;
+        if (CreateRoomActivity.roomExist!= null) {
+            Room room = CreateRoomActivity.roomExist;
             etWater.setText("" + room.getStage2().getmWater());
             etTV.setText("" + room.getStage2().getmTivi());
             etInternet.setText("" + room.getStage2().getmInternet());

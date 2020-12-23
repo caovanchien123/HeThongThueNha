@@ -1,30 +1,25 @@
 package com.example.hethongthuenha.Model;
 
+import com.google.firebase.Timestamp;
+
 public class Chat {
-    private int id_chat;
     private String text;
     private String from_email_person;
     private String to_email_person;
     private String url;
+    private Timestamp chatAdded;
 
     public Chat() {
     }
 
-    public Chat(int id_chat, String text, String from_email_person, String to_email_person, String url) {
-        this.id_chat = id_chat;
+    public Chat(String text, String from_email_person, String to_email_person, String url, Timestamp chatAdded) {
         this.text = text;
         this.from_email_person = from_email_person;
         this.to_email_person = to_email_person;
         this.url = url;
+        this.chatAdded = chatAdded;
     }
 
-    public int getId_chat() {
-        return id_chat;
-    }
-
-    public void setId_chat(int id_chat) {
-        this.id_chat = id_chat;
-    }
 
     public String getText() {
         return text;
@@ -56,5 +51,13 @@ public class Chat {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public Timestamp getChatAdded() {
+        return chatAdded;
+    }
+
+    public void setChatAdded(Timestamp chatAdded) {
+        this.chatAdded = chatAdded;
     }
 }

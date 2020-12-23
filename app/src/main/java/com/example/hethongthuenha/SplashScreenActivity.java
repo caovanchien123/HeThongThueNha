@@ -71,8 +71,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                             PersonAPI.getInstance().setName(person.getFullName());
                             PersonAPI.getInstance().setEmail(person.getEmail());
                             PersonAPI.getInstance().setType_person(person.getType_person());
-
-
+                            PersonAPI.getInstance().setLocked(person.isLocked());
                             //Get Point
                             db.collection("CreditCard").whereEqualTo("email_person", person.getEmail())
                                     .get().addOnSuccessListener(v -> {
@@ -84,14 +83,8 @@ public class SplashScreenActivity extends AppCompatActivity {
                                         PersonAPI.getInstance().setPoint(creditCard.getPoint());
                                     }
                                 }
-
-                                //Set Lock Account
-                                if (person.isLocked())
-                                    NotificationLock();
-                                else {
-                                    startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
-                                    finish();
-                                }
+                                startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
+                                finish();
                             });
 
                         }
@@ -99,6 +92,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
                 }).addOnFailureListener(e -> Log.d("SplashScreen-Error", "onCreate: " + e.getMessage()));
             } else {
+                PersonAPI.setInstance(null);
                 startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
                 finish();
             }
@@ -106,20 +100,6 @@ public class SplashScreenActivity extends AppCompatActivity {
         };
     }
 
-    private void NotificationLock() {
-        try {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Thông báo");
-            builder.setMessage("Tài khoản của bạn đã bị khóa muốn biết chi tiết xin liên hệ ******");
-            builder.setPositiveButton("Ok", (dialog, which) -> {
-                dialog.dismiss();
-                mAuth.signOut();
-            });
-            builder.show();
-        } catch (Exception ex) {
-            Toast.makeText(this, "Tài khoản của bạn đã bị khóa", Toast.LENGTH_SHORT).show();
-        }
-    }
 
     public void Animation() {
 
