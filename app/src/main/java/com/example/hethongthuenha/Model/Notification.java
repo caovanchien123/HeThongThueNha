@@ -10,6 +10,10 @@ public class Notification {
     private Timestamp notificationAdded;
 
 
+    public static int CHAT=1;
+    public static int ROOM=2;
+    public static int NOTHING=3;
+
     public Notification() {
     }
 

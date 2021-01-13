@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     app:contentPadding="16sp"
-    android:backgroundTint="@color/red_200"
+    android:backgroundTint="#ffeb3b"
     app:cardUseCompatPadding="true">
 
     <LinearLayout
@@ -20,7 +20,8 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
             android:entries="@array/spReport"
-            android:padding="16sp"
+            android:paddingTop="16sp"
+            android:paddingBottom="16sp"
             android:spinnerMode="dropdown" />
 
         <EditText
@@ -30,8 +31,8 @@
             android:layout_marginTop="20sp"
             android:hint="Mô tả (Có thể không cần)"
             android:inputType="text"
-            android:textColorHint="#EEEEEE"
-            android:textColor="@color/white" />
+            android:textColorHint="#ff3d00"
+            android:textColor="#3e2723" />
 
         <LinearLayout
             android:layout_width="match_parent"

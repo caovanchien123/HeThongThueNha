@@ -10,8 +10,12 @@
         android:title="Thanh Toán" />
 
     <item
-        android:id="@+id/mnAccount"
-        android:title="Tài khoản" />
+        android:id="@+id/mnMember"
+        android:title="Tài khoản thành viên" />
+
+    <item
+        android:id="@+id/mnSettingMember"
+        android:title="Thiết lập tài khoản" />
 
     <item
         android:id="@+id/mnAds"

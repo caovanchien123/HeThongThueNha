@@ -34,6 +34,7 @@
                 android:text=""
                 android:gravity="bottom"
                 android:textSize="18sp"
+                android:fontFamily="@font/belleza"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:layout_marginBottom="10sp"/>

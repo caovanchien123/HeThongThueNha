@@ -12,7 +12,7 @@ public class RetrofitClientInstance {
 
     public static Retrofit getRetrofitInstance(){
         if(retrofit==null){
-            retrofit=new Retrofit.Builder()
+            retrofit=new retrofit2.Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

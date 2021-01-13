@@ -8,16 +8,29 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 
 import com.example.hethongthuenha.API.PersonAPI;
-;
+import com.example.hethongthuenha.ActivitySettingPerson;
+import com.example.hethongthuenha.Adminstrator.ActivityAdmintrators;
+import com.example.hethongthuenha.Login.LoginActivity;
 import com.example.hethongthuenha.MainActivity.Fragment.Chat.fragment_list_chat;
 import com.example.hethongthuenha.MainActivity.Fragment.MainRoom.fragment_main_room;
 import com.example.hethongthuenha.MainActivity.Fragment.Notification.fragment_notification;
 import com.example.hethongthuenha.MainActivity.Fragment.Requiment.fragment_requiment;
+import com.example.hethongthuenha.Model.Person;
+import com.example.hethongthuenha.Notification.Token;
 import com.example.hethongthuenha.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.iid.FirebaseInstanceId;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
@@ -29,8 +42,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Init();
-
-
         Event();
     }
 
@@ -39,21 +50,19 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         setFragment(R.id.mnRoom);
         SetBottomNavigation();
+        updateToken(FirebaseInstanceId.getInstance().getToken());
     }
 
     private void SetBottomNavigation() {
         //neu khongg phai la admin
-        if (PersonAPI.getInstance().getType_person() == 1)
+        if (PersonAPI.getInstance().getType_person() != Person.ADMIN)
             bottomNavigationView.getMenu().removeItem(R.id.mnAdmin);
     }
 
     private void Event() {
         toolbar.setOnMenuItemClickListener(item -> {
-            if (item.getItemId() == R.id.mnPerson){
-                //startActivity(new Intent(MainActivity.this, ActivitySettingPerson.class));
-            }
-
-
+            if (item.getItemId() == R.id.mnPerson)
+                startActivity(new Intent(MainActivity.this, ActivitySettingPerson.class));
             return false;
         });
 
@@ -61,8 +70,6 @@ public class MainActivity extends AppCompatActivity {
             setFragment(v.getItemId());
             return true;
         });
-
-
     }
 
 
@@ -81,8 +88,8 @@ public class MainActivity extends AppCompatActivity {
                 fragment = new fragment_list_chat();
                 break;
             case R.id.mnAdmin:
-               // Intent intent = new Intent(MainActivity.this, ActivityAdmintrators.class);
-                //startActivity(intent);
+                Intent intent = new Intent(MainActivity.this, ActivityAdmintrators.class);
+                startActivity(intent);
                 finish();
                 break;
         }
@@ -113,4 +120,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (PersonAPI.getInstance() != null && PersonAPI.getInstance().isLocked()) {
+            LoginActivity.locked(this);
+        }
+    }
+
+    private void updateToken(String token) {
+        CollectionReference reference = FirebaseFirestore.getInstance().collection("Tokens");
+        Token token1 = new Token(token);
+        reference.document(PersonAPI.getInstance().getUid()).set(token1);
+    }
 }

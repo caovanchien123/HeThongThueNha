@@ -92,12 +92,7 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Spinner
-            android:id="@+id/spDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/Widget.AppCompat.Spinner.Underlined"
-            android:entries="@array/spDate"/>
+
     </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout

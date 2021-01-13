@@ -5,8 +5,12 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,10 +34,17 @@ import com.example.hethongthuenha.CreateRoom.CreateRoomActivity;
 import com.example.hethongthuenha.Model.Image_Room;
 import com.example.hethongthuenha.Model.Room;
 import com.example.hethongthuenha.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Timestamp;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,9 +71,10 @@ public class fragment_image extends Fragment {
 
     private static final int IMAGE_PICK_CODE = 1000;
     private static final int PERMISSION_CODE = 1001;
-    private ImageView[] listImgRoom = new ImageView[4];
+    private int lengthImg=4;
+    private ImageView[] listImgRoom = new ImageView[lengthImg];
     private Uri[] uri = new Uri[4];
-    private int imageAdded = 0;
+    private int imagePosition = 0;
     private StorageReference mStorageRef;
     private List<String> imageUrl;
     private ProgressDialog progressDialog;
@@ -81,12 +94,14 @@ public class fragment_image extends Fragment {
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Làm ơn đợi");
         imageUrl = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < lengthImg; i++) {
             String textViewStageId = "imgRoom" + (i + 1);
             int resId = getResources().getIdentifier(textViewStageId, "id", getActivity().getPackageName());
             listImgRoom[i] = view.findViewById(resId);
 
+            int finalI = i;
             listImgRoom[i].setOnClickListener(v -> {
+                imagePosition = finalI;
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (getActivity().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
                             == PackageManager.PERMISSION_DENIED) {
@@ -100,8 +115,8 @@ public class fragment_image extends Fragment {
             });
         }
 
-        if (CreateRoomActivity.roomUpdate != null) {
-            Room room = CreateRoomActivity.roomUpdate;
+        if (CreateRoomActivity.roomExist != null) {
+            Room room = CreateRoomActivity.roomExist;
             int i = 0;
             for (String url : room.getStage3().getImagesURL()) {
                 ImageView imageView = listImgRoom[i++];
@@ -117,10 +132,13 @@ public class fragment_image extends Fragment {
         btnFinishStage3.setOnClickListener(v -> {
             if (isValid()) {
                 progressDialog.show();
-                if (CreateRoomActivity.roomUpdate == null)
+                if (CreateRoomActivity.roomExist == null)
                     SaveImage();
-                else
+                else {
+                    ChangeImage(CreateRoomActivity.roomExist.getRoom_id());
                     ChangeFragment();
+                }
+
             }
 
         });
@@ -136,6 +154,28 @@ public class fragment_image extends Fragment {
         fragmentTransaction.commit();
         dataCommunication.Image(new Image_Room(imageUrl));
         progressDialog.dismiss();
+    }
+
+    private void ChangeImage(String id) {
+        StorageReference filepath;
+
+        for (int i = 0; i < uri.length; i++) {
+
+            filepath = mStorageRef.child("room_image").child(id + "room_" + i);
+            StorageReference finalFilepath = filepath;
+            if (uri[i] != null) {
+                Log.d("data", "ChangeImage: "+uri[i]);
+                filepath.putFile(uri[i])
+                        .addOnSuccessListener(taskSnapshot -> finalFilepath.getDownloadUrl().
+                                addOnSuccessListener(uri -> {
+                                    imageUrl.add(uri.toString());
+                                    if (imageUrl.size() == 4) {
+                                        ChangeFragment();
+                                    }
+                                })).
+                        addOnFailureListener(e -> Log.d("SIMPLE", "onFailure: " + e.getMessage()));
+            }
+        }
     }
 
     private void SaveImage() {
@@ -181,20 +221,16 @@ public class fragment_image extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE) {
-            uri[imageAdded] = data.getData();
-
-            listImgRoom[imageAdded].setImageURI(uri[imageAdded]);
-
-            listImgRoom[imageAdded].setContentDescription("Added");
-
-            imageAdded++;
+            uri[imagePosition] = data.getData();
+            listImgRoom[imagePosition].setImageURI(uri[imagePosition]);
+            listImgRoom[imagePosition].setContentDescription("Added");
         }
     }
 
     private boolean isValid() {
         String errorImg = "";
         boolean valid = true;
-        for (int i = 0; i < listImgRoom.length; i++)
+        for (int i = 0; i < lengthImg; i++)
             if (listImgRoom[i].getContentDescription() == null) {
                 errorImg += "Bạn chưa chọn ảnh " + (i + 1) + "\n";
                 valid = false;

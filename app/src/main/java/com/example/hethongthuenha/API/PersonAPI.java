@@ -6,6 +6,7 @@ public class PersonAPI extends Application {
     private String uid;
     private String name;
     private String email;
+    private String password;
     private int type_person;
     private boolean isLocked;
     private double point;
@@ -15,6 +16,18 @@ public class PersonAPI extends Application {
         if (instance == null)
             instance = new PersonAPI();
         return instance;
+    }
+
+    public static void setInstance(PersonAPI instance) {
+        PersonAPI.instance = instance;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public int getType_person() {

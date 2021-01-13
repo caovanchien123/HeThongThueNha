@@ -193,9 +193,9 @@ ActivityRoomDetail extends AppCompatActivity {
 
     private void GoToPerson() {
         cvPerson.setOnClickListener(v -> {
-//            Intent intent = new Intent(ActivityRoomDetail.this, ActivityPerson.class);
-//            intent.putExtra("id_person", room.getPerson_id());
-//            startActivity(intent);
+            Intent intent = new Intent(ActivityRoomDetail.this, ActivityPerson.class);
+            intent.putExtra("id_person", room.getPerson_id());
+            startActivity(intent);
         });
     }
 
@@ -388,6 +388,7 @@ ActivityRoomDetail extends AppCompatActivity {
                 .get().addOnSuccessListener(queryDocumentSnapshots -> {
             if (queryDocumentSnapshots.isEmpty()) {
                 btnBookRoom.setText("Đặt phòng");
+                etComment.setVisibility(View.GONE);
             } else {
                 for (QueryDocumentSnapshot value : queryDocumentSnapshots) {
                     BookRoom bookRoom = value.toObject(BookRoom.class);
@@ -410,10 +411,12 @@ ActivityRoomDetail extends AppCompatActivity {
                         } else {
                             btnBookRoom.setText("Hủy đặt phòng");
                         }
+                        etComment.setVisibility(View.VISIBLE);
 
 
                     } else {
                         btnBookRoom.setText("Hủy đặt phòng");
+                        etComment.setVisibility(View.VISIBLE);
                     }
                 }
             }
@@ -465,13 +468,18 @@ ActivityRoomDetail extends AppCompatActivity {
             if (value.isSuccessful()) {
                 for (QueryDocumentSnapshot persons : value.getResult()) {
                     Person person = persons.toObject(Person.class);
-//                    Intent intent = new Intent(ActivityRoomDetail.this, ActivityChat.class);
-//                    intent.putExtra("toId", person.getUid());
-//                    intent.putExtra("toEmail", person.getEmail());
-//                    intent.putExtra("toName", person.getFullName());
-//                    intent.putExtra("description_room", "Tôi muốn thuê căn nhà " + room.getStage1().getTitle());
-//                    intent.putExtra("url", room.getStage3().getImagesURL().get(0));
-//                    startActivity(intent);
+                    if(!room.getPerson_id().equals(PersonAPI.getInstance().getUid())){
+                        Intent intent = new Intent(ActivityRoomDetail.this, ActivityChat.class);
+                        intent.putExtra("toId", person.getUid());
+                        intent.putExtra("toEmail", person.getEmail());
+                        intent.putExtra("toName", person.getFullName());
+                        intent.putExtra("description_room", "Tôi muốn thuê căn nhà " + room.getStage1().getTitle());
+                        intent.putExtra("url", room.getStage3().getImagesURL().get(0));
+                        startActivity(intent);
+                    }else{
+                        Toast.makeText(this, "Không thể đặt phòng của chính mình !", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
             }
         });
@@ -516,7 +524,7 @@ ActivityRoomDetail extends AppCompatActivity {
         tvAddress.setText("Địa chỉ:" + description_room.getAddress());
         tvAmout.setText("Số lượng:" + description_room.getAmout());
         tvAccommodation.setText("Sức chứa:" + description_room.getAccommodation() + "/người");
-        tvPrice.setText("Giá:" + formatter.format(description_room.getPrice()) + "/" + description_room.getType_date());
+        tvPrice.setText("Giá:" + formatter.format(description_room.getPrice()) + "/Tháng");
         tvArea.setText("Diện tích:" + description_room.getArea() + "m2");
         tvTypeRoom.setText("Loại:" + description_room.getType_room());
         tvDescription.setText("Mô tả:" + description_room.getDescription());
@@ -570,6 +578,7 @@ ActivityRoomDetail extends AppCompatActivity {
     }
 
     private void CommentRoom() {
+
 
         etComment.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH ||

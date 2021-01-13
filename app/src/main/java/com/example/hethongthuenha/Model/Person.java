@@ -11,6 +11,11 @@ public class Person {
     private int type_person;
     private boolean locked;
 
+    public static int NORMAL=1;
+    public static int ADMIN=2;
+
+
+
 
     public Person() {
     }

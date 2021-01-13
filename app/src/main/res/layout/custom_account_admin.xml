@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="10sp"
+    android:layout_width="match_parent"
+    android:id="@+id/cv_custom_person_chat"
+    app:cardUseCompatPadding="true"
+    android:backgroundTint="@color/design_default_color_primary"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:padding="16sp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_custom_account"
+            android:layout_width="80sp"
+            android:layout_height="80sp"
+            android:src="@drawable/ic_baseline_person_24"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_custom_account_name"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="Pham Thanh Huy"
+                android:gravity="bottom"
+                android:textSize="12sp"
+                android:layout_weight="1"
+                android:fontFamily="@font/belleza"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_marginBottom="10sp" />
+
+            <TextView
+                android:id="@+id/tv_custom_account_email"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:lines="1"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                android:layout_weight="1"
+                android:layout_marginLeft="10sp"
+                android:text="phamthanhhuy332@mgail.com"/>
+
+            <TextView
+                android:id="@+id/tv_custom_account_state"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10sp"
+                android:layout_height="0dp"
+                android:lines="1"
+                android:textColor="@color/yellow_100"
+                android:textSize="10sp"
+                android:layout_weight="1"
+                android:fontFamily="monospace"
+                android:text="Chưa khóa"/>
+
+        </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/img_custom_setting_state"
+        android:layout_width="30sp"
+        android:layout_height="30sp"
+        android:layout_gravity="center"
+        android:src="@drawable/settings"
+        android:scaleType="fitXY"
+        android:background="@android:color/transparent"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

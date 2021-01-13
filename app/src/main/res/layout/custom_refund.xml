@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="10sp"
+    android:layout_width="match_parent"
+    app:contentPadding="16sp"
+    android:id="@+id/cv_custom_person_chat"
+    app:cardUseCompatPadding="true"
+    android:backgroundTint="@color/yellow_100"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_custom_person_refund"
+            android:layout_width="80sp"
+            android:layout_height="80sp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_baseline_person_24"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginLeft="10sp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_custom_name_refund"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pham Thanh Huy"
+                android:gravity="bottom"
+                android:textSize="18sp"
+                android:fontFamily="@font/belleza"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginBottom="10sp"/>
+
+            <TextView
+                android:id="@+id/tv_custom_price_refund"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:textSize="12sp"
+                android:gravity="bottom"
+                android:layout_marginBottom="10sp"
+                android:text="59.394 VNĐ"/>
+
+            <TextView
+                android:id="@+id/tv_bank_card_refund"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:layout_weight="1"
+                android:layout_marginBottom="10sp"
+                android:gravity="bottom"
+                android:text="STK:0111xxxx"/>
+
+
+
+            <TextView
+                android:id="@+id/tv_custom_timestamp_refund"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:textSize="12sp"
+                android:gravity="bottom"
+                android:text="1 ngày trước"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/img_done_refund"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_baseline_check_circle_outline_24"/>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
