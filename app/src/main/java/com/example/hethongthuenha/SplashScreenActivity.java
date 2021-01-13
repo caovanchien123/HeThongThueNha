@@ -1,13 +1,10 @@
 package com.example.hethongthuenha;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -21,13 +18,11 @@ import com.example.hethongthuenha.Login.LoginActivity;
 import com.example.hethongthuenha.MainActivity.MainActivity;
 import com.example.hethongthuenha.Model.CreditCard;
 import com.example.hethongthuenha.Model.Person;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
