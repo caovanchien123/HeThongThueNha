@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="10sp"
+    android:layout_width="match_parent"
+    app:contentPadding="16sp"
+    android:id="@+id/cv_custom_person_chat"
+    app:cardUseCompatPadding="true"
+    android:backgroundTint="@color/yellow_100"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_custom_person_chat"
+            android:layout_width="80sp"
+            android:layout_height="100sp"
+            android:src="@drawable/ic_baseline_person_24"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginLeft="10sp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_custom_name_chat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pham Thanh Huy"
+                android:gravity="bottom"
+                android:textSize="18sp"
+                android:fontFamily="@font/belleza"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginBottom="10sp"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/tv_custom_last_chat"
+                android:layout_marginBottom="15sp"
+                android:layout_width="match_parent"
+                android:layout_height="10sp"
+                android:lines="1"
+                android:layout_weight="1"
+                android:gravity="bottom"
+                android:text="Toi muon thue nha"/>
+
+            <TextView
+                android:id="@+id/tv_custom_time_last_chat"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="bottom"
+                android:textSize="10sp"
+                android:fontFamily="@font/alice"
+                android:text="12/09/2020 18:23"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
